@@ -21,23 +21,10 @@ require('lazy').setup({
     -- TODO: Figure out how to bootstrap rip-grep
 	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 
-	{ -- Treesitter
-        'nvim-treesitter/nvim-treesitter',
-        build = ':TSUpdate',
-        config = function ()
-            require('nvim-treesitter.configs').setup({
-                sync_install = false,
-                auto_install = true,
-                highlight = {
-                    enable = true,
-                }
-            })
-        end
-    },
+	{ 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', },
 
     -- Tmux Integration
-    'anakin4747/vim-tmux-nav-lua',
-    -- 'christoomey/vim-tmux-navigator',
+    'anakin4747/vim-tmux-nav-lua', -- 'christoomey/vim-tmux-navigator',
 
 	{ -- Colorscheme
 		'ellisonleao/gruvbox.nvim',
@@ -45,8 +32,7 @@ require('lazy').setup({
 		config = function ()
 			vim.o.background = 'dark'
 			vim.cmd('colorscheme gruvbox')
-			-- Enable opacity
-			vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+			vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' }) -- Enable opacity
 		end,
 	},
 
@@ -58,25 +44,9 @@ require('lazy').setup({
 		end
 	},
 
-    -- -- LSP 
     -- 'neovim/nvim-lspconfig',
     --
-    -- requires = {
-    --     {'williamboman/mason.nvim'},
-    --     {'williamboman/mason-lspconfig.nvim'},
-    --     {'folke/neodev.nvim'},
-    -- }
-             
-    -- -- Completion
-    -- 'hrsh7th/cmp-path',
-    -- use('hrsh7th/nvim-cmp')
-    -- use('hrsh7th/cmp-buffer')
-    -- use('hrsh7th/cmp-cmdline')
-    -- use('saadparwaiz1/cmp_luasnip')
-    -- use('hrsh7th/cmp-nvim-lsp')
+    -- { 'folke/neodev.nvim', opts = {} },
 
-    -- -- Snippets
-    -- use('L3MON4D3/LuaSnip')
-    -- use('rafamadriz/friendly-snippets')
 
 })
