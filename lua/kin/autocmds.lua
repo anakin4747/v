@@ -1,20 +1,36 @@
 
 -- Yank on Highlight
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', {})
 vim.api.nvim_create_autocmd('TextYankPost', {
+    group = vim.api.nvim_create_augroup('YankHighlight', { clear = true }),
     callback = function()
         vim.highlight.on_yank()
     end,
-    group = highlight_group,
     pattern = '*',
 })
 
 -- Auto Unfold All Folds
-local autounfold_group = vim.api.nvim_create_augroup('Unfold', {})
 vim.api.nvim_create_autocmd('BufRead', {
+    group = vim.api.nvim_create_augroup('Unfold', { clear = true }),
     callback = function()
         vim.cmd('norm zR')
     end,
-    group = autounfold_group,
     pattern = '*',
+})
+
+-- Make on Write for LaTeX files
+vim.api.nvim_create_autocmd('BufWritePost', {
+    group = vim.api.nvim_create_augroup('LatexMake', { clear = true }),
+    callback = function()
+        local current_directory = vim.fn.expand('%:p:h')
+
+        -- Check if a Makefile exists in the current directory
+        local makefile_exists = vim.fn.filereadable(current_directory .. '/Makefile') == 1
+
+        if makefile_exists then
+            vim.cmd('silent make')
+        else
+            print("No Makefile found for LaTeX compilation")
+        end
+    end,
+    pattern = '*.tex',  -- Trigger only on LaTeX file writes
 })
