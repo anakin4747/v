@@ -44,9 +44,7 @@ require('lazy').setup({
 		end
 	},
 
-    -- 'neovim/nvim-lspconfig',
-    --
-    -- { 'folke/neodev.nvim', opts = {} },
+    'neovim/nvim-lspconfig',
 
-
+    { 'folke/neodev.nvim', opts = {} },
 })
