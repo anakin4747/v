@@ -1,6 +1,7 @@
 --- DEBUG init.lua
 
 local includes = {
+    'autocmds',
     'dapui',
     'gdb',
 }
