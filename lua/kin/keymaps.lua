@@ -34,8 +34,8 @@ local global_keymaps = {
     { 'n', '<leader>n',  dap.step_over },
     { 'n', '<leader>si', dap.step_into },
     { 'n', '<leader>so', dap.step_out },
-    { 'n', '<Leader>b',  dap.toggle_breakpoint },
-    { 'n', '<Leader>B',  dap.set_breakpoint },
+    { 'n', '<Leader>b',  dap.toggle_breakpoint }, -- TODO add logic to set signcolumn = "no" if there are no more brkpnts
+    { 'n', '<Leader>B',  dap.set_breakpoint }, -- TODO add logic to set signcolumn = "yes" if there are no brkpnts
 
     { 'n', '<Leader>lp', function()
         dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
