@@ -1,11 +1,10 @@
 local opts = { noremap = true, silent = true }
 
--- Leader becomes space
 vim.g.mapleader = " "
 
 local builtin = require('telescope.builtin')
-local dap = require('dap')
-local ui_widgets = require('dap.ui.widgets')
+local dap, dapui = require("dap"), require("dapui")
+-- local ui_widgets = require('dap.ui.widgets')
 
 local global_keymaps = {
 
@@ -34,18 +33,20 @@ local global_keymaps = {
     { 'n', '<leader>n',  dap.step_over },
     { 'n', '<leader>si', dap.step_into },
     { 'n', '<leader>so', dap.step_out },
-    { 'n', '<Leader>b',  dap.toggle_breakpoint }, -- TODO add logic to set signcolumn = "no" if there are no more brkpnts
-    { 'n', '<Leader>B',  dap.set_breakpoint }, -- TODO add logic to set signcolumn = "yes" if there are no brkpnts
+    { 'n', '<leader>b',  dap.toggle_breakpoint }, -- TODO add logic to set signcolumn = "no" if there are no more brkpnts
 
-    { 'n', '<Leader>lp', function()
+    { 'n', '<leader>lp', function()
         dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
     end },
-    { 'n',          '<Leader>dr', dap.repl.open },
-    { 'n',          '<Leader>dl', dap.run_last },
-    { { 'n', 'v' }, '<Leader>dh', ui_widgets.hover },
-    { { 'n', 'v' }, '<Leader>dp', ui_widgets.preview },
-    { 'n',          '<Leader>df', function() ui_widgets.centered_float(ui_widgets.frames) end },
-    { 'n',          '<Leader>ds', function() ui_widgets.centered_float(ui_widgets.scopes) end },
+    { 'n',          '<leader>dr', dap.repl.open },
+    { 'n',          '<leader>uo', dapui.open },
+    { 'n',          '<leader>uc', dapui.close },
+    -- TODO Learn these first before implementing them
+    -- { 'n',          '<leader>dl', dap.run_last },
+    -- { { 'n', 'v' }, '<leader>dh', ui_widgets.hover },
+    -- { { 'n', 'v' }, '<leader>dp', ui_widgets.preview },
+    -- { 'n',          '<leader>df', function() ui_widgets.centered_float(ui_widgets.frames) end },
+    -- { 'n',          '<leader>ds', function() ui_widgets.centered_float(ui_widgets.scopes) end },
 }
 
 for _, keymap in ipairs(global_keymaps) do
