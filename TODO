@@ -1,9 +1,10 @@
 
 
-Completions
 omnifunc
 appearance of hover menu
 appearance of completion menu
+
+Creating custom snippets and getting snippet keybindings working
 
 Add a menu for selecting your executable file and args
 Have the menu have memory form the previous run

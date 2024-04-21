@@ -18,7 +18,6 @@ require('lazy').setup({
 	'nvim-lua/plenary.nvim',
 
     'nvim-telescope/telescope.nvim', -- requires rip-grep
-    -- TODO: Figure out how to bootstrap rip-grep
 	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 
 	{ 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', },

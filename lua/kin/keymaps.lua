@@ -1,19 +1,47 @@
+-- Try to keep all keymaps here
+--
+-- Only other place for sure that they are set are in my tmux plugin and
+-- cmp.lua
+
 local opts = { noremap = true, silent = true }
 
 vim.g.mapleader = " "
 
 local builtin = require('telescope.builtin')
+local ls = require('luasnip')
 local dap, dapui = require("dap"), require("dapui")
 -- local ui_widgets = require('dap.ui.widgets')
 
 local global_keymaps = {
 
     -- Navigate buffers
-    { "n", "<S-l>",      ":bnext<CR>",             opts },
-    { "n", "<S-h>",      ":bprevious<CR>",         opts },
+    { "n", "<S-l>", ":bnext<CR>",     opts },
+    { "n", "<S-h>", ":bprevious<CR>", opts },
 
     -- Press jk fast to escape
-    { "i", "jk",         "<ESC>",                  opts },
+    { "i", "jk",    "<ESC>",          opts },
+
+    -- Snippets
+    { { 'i', 's' }, '<c-l>', function()
+        if ls.expand_or_jumpable() then
+            vim.notify("expand_or_jumpable", vim.log.levels.WARN)
+        end
+        ls.expand_or_jump()
+        vim.notify("not expand_or_jumpable", vim.log.levels.WARN)
+    end, { silent = true } },
+
+    { { 'i', 's' }, '<c-j>', function()
+        if ls.jumpable(-1) then
+            ls.jump(-1)
+        end
+    end, { silent = true } },
+
+    { 'i', '<c-k>', function()
+        if ls.choice_active() then
+            ls.choice_active(1)
+        end
+    end, { silent = true } },
+    { 'n', '<leader><leader>s', '<cmd>source ~/.arch.files/.config/nvim/lua/kin/snip.lua<CR>', },
 
     -- Telescope keymaps
     { 'n', '<leader>ff', builtin.find_files,       opts },
@@ -38,9 +66,9 @@ local global_keymaps = {
     { 'n', '<leader>lp', function()
         dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
     end },
-    { 'n',          '<leader>dr', dap.repl.open },
-    { 'n',          '<leader>uo', dapui.open },
-    { 'n',          '<leader>uc', dapui.close },
+    { 'n', '<leader>dr', dap.repl.open },
+    { 'n', '<leader>uo', dapui.open },
+    { 'n', '<leader>uc', dapui.close },
     -- TODO Learn these first before implementing them
     -- { 'n',          '<leader>dl', dap.run_last },
     -- { { 'n', 'v' }, '<leader>dh', ui_widgets.hover },
