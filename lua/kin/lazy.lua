@@ -44,7 +44,15 @@ require('lazy').setup({
 		end
 	},
 
+    -- LSPs
     'neovim/nvim-lspconfig',
-
     { 'folke/neodev.nvim', opts = {} },
+
+    -- Debug Integration
+    'mfussenegger/nvim-dap',
+    'nvim-neotest/nvim-nio',
+    'rcarriga/nvim-dap-ui',
+    -- TODO
+    -- 'theHamsta/nvim-dap-virtual-text',
+
 })
