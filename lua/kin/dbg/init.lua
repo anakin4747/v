@@ -2,11 +2,13 @@
 
 local includes = {
     'autocmds',
+    'bashdb',
     'dapui',
+    'debugpy',
     'gdb',
 }
 
-local debug = true
+local debug = false
 
 -- Makes sure each file required exists and is syntatically correct
 -- Great for still having functionality if part of your config breaks

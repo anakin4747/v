@@ -39,7 +39,7 @@ require('lazy').setup({
 	{ -- Comments - gc to comment
 		'numToStr/Comment.nvim',
 		lazy = false,
-		config = function()
+		config = function ()
 			require('Comment').setup()
 		end
 	},
@@ -52,7 +52,17 @@ require('lazy').setup({
     'mfussenegger/nvim-dap',
     'nvim-neotest/nvim-nio',
     'rcarriga/nvim-dap-ui',
-    -- TODO
-    -- 'theHamsta/nvim-dap-virtual-text',
+    {
+        'theHamsta/nvim-dap-virtual-text',
+        config = function ()
+            require('nvim-dap-virtual-text').setup()
+        end,
+    },
+    {
+        'williamboman/mason.nvim',
+        config = function ()
+            require('mason').setup()
+        end,
+    },
 
 })
