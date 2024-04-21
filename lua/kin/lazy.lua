@@ -33,6 +33,7 @@ require('lazy').setup({
 			vim.o.background = 'dark'
 			vim.cmd('colorscheme gruvbox')
 			vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' }) -- Enable opacity
+			vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' }) -- Enable opacity
 		end,
 	},
 
@@ -43,6 +44,17 @@ require('lazy').setup({
 			require('Comment').setup()
 		end
 	},
+
+    -- Completion
+    'hrsh7th/nvim-cmp',
+    'hrsh7th/cmp-buffer',
+    'hrsh7th/cmp-path',
+    'hrsh7th/cmp-nvim-lua',
+    'hrsh7th/cmp-nvim-lsp',
+
+    -- Snippets
+    'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
 
     -- LSPs
     'neovim/nvim-lspconfig',

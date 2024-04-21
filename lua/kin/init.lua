@@ -4,6 +4,7 @@ require('kin.lazy') -- Needs to be first for bootstrapping
 
 local includes = {
     'autocmds',
+    'cmp',
     'dbg',
     'keymaps',
     'lsp',

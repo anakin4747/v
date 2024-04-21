@@ -1,9 +1,19 @@
 
 
 Completions
+omnifunc
 appearance of hover menu
+appearance of completion menu
 
 Add a menu for selecting your executable file and args
 Have the menu have memory form the previous run
 Have the menu also find executable files for you to choose from
 the menu could also provide an option to build maybe
+
+
+Look into nvim-libmodal
+    - See if you could have a debug mode so that you don't need to prefix
+      gdb-like keybindings with leader
+    - Diagnostic mode? idk maybe
+    - i bet there are a bunch of ways to use this
+
