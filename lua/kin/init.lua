@@ -9,7 +9,7 @@ local includes = {
     'keymaps',
     'lsp',
     'options',
-    'snip',
+    -- 'snip',
     'telescope',
     'treesitter',
 }

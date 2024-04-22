@@ -1,5 +1,8 @@
 
 
+Have the hover menu print the man page for the function if available
+
+
 omnifunc
 appearance of hover menu
 appearance of completion menu
