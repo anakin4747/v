@@ -17,10 +17,13 @@ require('lazy').setup({
 	'nvim-lua/popup.nvim',
 	'nvim-lua/plenary.nvim',
 
+    -- Telescope
     'nvim-telescope/telescope.nvim', -- requires rip-grep
 	{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 
 	{ 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate', },
+
+    'mbbill/undotree',
 
     -- Tmux Integration
     'anakin4747/vim-tmux-nav-lua', -- 'christoomey/vim-tmux-navigator',
@@ -58,7 +61,8 @@ require('lazy').setup({
 
 
     -- LSPs
-    'neovim/nvim-lspconfig',
+    -- 'neovim/nvim-lspconfig',
+    { 'anakin4747/nvim-lspconfig', branch = 'bitbake', },
     { 'folke/neodev.nvim', opts = {} },
 
     -- Debug Integration

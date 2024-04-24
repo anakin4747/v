@@ -21,27 +21,7 @@ local global_keymaps = {
     -- Press jk fast to escape
     { "i", "jk",    "<ESC>",          opts },
 
-    -- Snippets
-    { { 'i', 's' }, '<c-l>', function()
-        if ls.expand_or_jumpable() then
-            vim.notify("expand_or_jumpable", vim.log.levels.WARN)
-        end
-        ls.expand_or_jump()
-        vim.notify("not expand_or_jumpable", vim.log.levels.WARN)
-    end, { silent = true } },
-
-    { { 'i', 's' }, '<c-j>', function()
-        if ls.jumpable(-1) then
-            ls.jump(-1)
-        end
-    end, { silent = true } },
-
-    { 'i', '<c-k>', function()
-        if ls.choice_active() then
-            ls.choice_active(1)
-        end
-    end, { silent = true } },
-    { 'n', '<leader><leader>s', '<cmd>source ~/.arch.files/.config/nvim/lua/kin/snip.lua<CR>', },
+    { "n", "<leader>ut", vim.cmd.UndotreeToggle },
 
     -- Telescope keymaps
     { 'n', '<leader>ff', builtin.find_files,       opts },
@@ -75,6 +55,30 @@ local global_keymaps = {
     -- { { 'n', 'v' }, '<leader>dp', ui_widgets.preview },
     -- { 'n',          '<leader>df', function() ui_widgets.centered_float(ui_widgets.frames) end },
     -- { 'n',          '<leader>ds', function() ui_widgets.centered_float(ui_widgets.scopes) end },
+
+    -- TODO
+    -- Snippets
+    -- { { 'i', 's' }, '<c-l>', function()
+    --     if ls.expand_or_jumpable() then
+    --         vim.notify("expand_or_jumpable", vim.log.levels.WARN)
+    --     end
+    --     ls.expand_or_jump()
+    --     vim.notify("not expand_or_jumpable", vim.log.levels.WARN)
+    -- end, { silent = true } },
+    --
+    -- { { 'i', 's' }, '<c-j>', function()
+    --     if ls.jumpable(-1) then
+    --         ls.jump(-1)
+    --     end
+    -- end, { silent = true } },
+    --
+    -- { 'i', '<c-k>', function()
+    --     if ls.choice_active() then
+    --         ls.choice_active(1)
+    --     end
+    -- end, { silent = true } },
+    -- { 'n', '<leader><leader>s', '<cmd>source ~/.arch.files/.config/nvim/lua/kin/snip.lua<CR>', },
+
 }
 
 for _, keymap in ipairs(global_keymaps) do
