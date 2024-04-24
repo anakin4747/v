@@ -8,7 +8,7 @@ local opts = { noremap = true, silent = true }
 vim.g.mapleader = " "
 
 local builtin = require('telescope.builtin')
-local ls = require('luasnip')
+-- local ls = require('luasnip')
 local dap, dapui = require("dap"), require("dapui")
 -- local ui_widgets = require('dap.ui.widgets')
 
