@@ -26,6 +26,7 @@ local includes = {
     'dockerls',
     'ltex',
     'pyright',
+    'tsserver',
 }
 
 for _, file in ipairs(includes) do
