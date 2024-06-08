@@ -25,6 +25,8 @@ require('lazy').setup({
 
     'mbbill/undotree',
 
+    'tpope/vim-fugitive',
+
     -- Tmux Integration
     'anakin4747/vim-tmux-nav-lua', -- 'christoomey/vim-tmux-navigator',
 
@@ -53,16 +55,17 @@ require('lazy').setup({
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-nvim-lua',
     'hrsh7th/cmp-nvim-lsp',
+    'chrisbra/unicode.vim', -- Emojis and digraphs
     'saadparwaiz1/cmp_luasnip',
 
     -- Snippets
     'L3MON4D3/LuaSnip',
     'rafamadriz/friendly-snippets',
 
-
     -- LSPs
     -- 'neovim/nvim-lspconfig',
     { 'anakin4747/nvim-lspconfig', branch = 'bitbake', },
+    { 'p00f/clangd_extensions.nvim' },
     { 'folke/neodev.nvim', opts = {} },
 
     -- Debug Integration
@@ -75,6 +78,7 @@ require('lazy').setup({
             require('nvim-dap-virtual-text').setup()
         end,
     },
+
     {
         'williamboman/mason.nvim',
         config = function ()
