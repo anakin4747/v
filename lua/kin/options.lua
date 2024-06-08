@@ -59,3 +59,5 @@ Human mode options:
 for k, v in pairs(options) do
     vim.opt[k] = v
 end
+
+vim.o.shortmess = vim.o.shortmess .. "I"    -- Avoid intro message on startup
