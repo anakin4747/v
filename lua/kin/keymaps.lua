@@ -18,34 +18,54 @@ local global_keymaps = {
     { "n", "<S-l>", ":bnext<CR>",     opts },
     { "n", "<S-h>", ":bprevious<CR>", opts },
 
-    -- Press jk fast to escape
-    { "i", "jk",    "<ESC>",          opts },
 
+
+    -- Undotree
     { "n", "<leader>ut", vim.cmd.UndotreeToggle },
 
-    -- Telescope keymaps
-    { 'n', '<leader>ff', builtin.find_files,       opts },
-    { 'n', '<leader>fg', builtin.live_grep,        opts },
-    { 'n', '<leader>fb', builtin.buffers,          opts },
-    { 'n', '<leader>fh', builtin.help_tags,        opts },
-    { 'n', '<leader>km', builtin.keymaps,          opts },
+    -- Telescope
+    { 'n', '<leader>au', builtin.autocommands, opts },
+    { 'n', '<leader>b',  builtin.buffers,      opts },
+    { 'n', '<leader>fd', builtin.fd,           opts },
+    {
+        'n', '<leader>ff',
+        function ()
+            local success, _ = pcall(builtin.git_files)
+            if not success then builtin.find_files() end
+        end,
+        opts
+    },
+    { 'n', '<leader>fg', builtin.live_grep,   opts },
+    { 'n', '<leader>gbc', builtin.git_bcommits, opts },
+    { 'n', '<leader>gc', builtin.git_commits, opts },
+    { 'n', '<leader>gr', builtin.grep_string, opts },
+    { 'n', '<leader>gs', builtin.git_status, opts },
+    { 'n', '<leader>fh', builtin.help_tags,   opts },
+    { 'n', '<leader>km', builtin.keymaps,     opts },
+    { 'n', '<leader>m', builtin.man_pages,     opts },
+    { 'n', '<leader>of', builtin.oldfiles,     opts },
+    { 'n', '<leader>qf', builtin.quickfix,     opts },
+    { 'n', '<leader>rg', builtin.registers,     opts },
+    { 'n', '<leader>ts', builtin.treesitter,  opts },
+    { 'n', '<leader><C-o>', builtin.resume,  opts },
+    { 'n', '<leader>&', builtin.vim_options,  opts },
 
     -- Diagnostics
-    { 'n', '<leader>e',  vim.diagnostic.open_float },
-    { 'n', '[d',         vim.diagnostic.goto_prev },
-    { 'n', ']d',         vim.diagnostic.goto_next },
-    { 'n', '<leader>q',  vim.diagnostic.setloclist },
+    { 'n', '<leader>e',  vim.diagnostic.open_float, opts },
+    { 'n', '[d',         vim.diagnostic.goto_prev,  opts },
+    { 'n', ']d',         vim.diagnostic.goto_next,  opts },
+    { 'n', '<leader>q',  vim.diagnostic.setloclist, opts },
 
     -- Debugging
-    { 'n', '<leader>c',  dap.continue },
-    { 'n', '<leader>n',  dap.step_over },
-    { 'n', '<leader>si', dap.step_into },
-    { 'n', '<leader>so', dap.step_out },
-    { 'n', '<leader>b',  dap.toggle_breakpoint }, -- TODO add logic to set signcolumn = "no" if there are no more brkpnts
+    { 'n', '<leader>c',  dap.continue,          opts },
+    { 'n', '<leader>n',  dap.step_over,         opts },
+    { 'n', '<leader>si', dap.step_into,         opts },
+    { 'n', '<leader>so', dap.step_out,          opts },
+    { 'n', '<leader>b',  dap.toggle_breakpoint, opts }, -- TODO add logic to set signcolumn = "no" if there are no more brkpnts
 
     { 'n', '<leader>lp', function()
         dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
-    end },
+    end, opts },
 
     { 'n', '<leader>dr', dap.repl.open },
     { 'n', '<leader>uo', dapui.open },
