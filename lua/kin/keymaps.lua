@@ -18,7 +18,14 @@ local global_keymaps = {
     { "n", "<S-l>", ":bnext<CR>",     opts },
     { "n", "<S-h>", ":bprevious<CR>", opts },
 
+    -- Keep cursor postion with J
+    { "n", "J", "mzJ`z", opts },
 
+    -- Center after jumps
+    { "n", "<C-d>", "<C-d>zz", opts },
+    { "n", "<C-u>", "<C-u>zz", opts },
+    { "n", "n", "nzzzv", opts },
+    { "n", "N", "Nzzzv", opts },
 
     -- Undotree
     { "n", "<leader>ut", vim.cmd.UndotreeToggle },
