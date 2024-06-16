@@ -18,6 +18,9 @@ local global_keymaps = {
     { "n", "<S-l>", ":bnext<CR>",     opts },
     { "n", "<S-h>", ":bprevious<CR>", opts },
 
+    -- Toggle crosshair
+    { "n", "<leader>ch", ":set invcuc | set invcul<CR>", opts },
+
     -- Keep cursor postion with J
     { "n", "J", "mzJ`z", opts },
 
