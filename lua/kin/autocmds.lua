@@ -37,3 +37,9 @@ vim.api.nvim_create_autocmd('BufWritePost', {
     pattern = '*.tex',  -- Trigger only on LaTeX file writes
     desc = "Run make on write if in a LaTeX file"
 })
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    command = [[%s/\s\+$//e]],
+    desc = "Remove trailing whitespace on write"
+})
