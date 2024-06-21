@@ -28,7 +28,8 @@ require('lazy').setup({
     'tpope/vim-fugitive',
 
     -- Tmux Integration
-    'anakin4747/vim-tmux-nav-lua', -- 'christoomey/vim-tmux-navigator',
+    'anakin4747/vim-tmux-nav-lua',
+    -- 'christoomey/vim-tmux-navigator',
 
 	{ -- Colorscheme
 		'ellisonleao/gruvbox.nvim',
@@ -42,11 +43,8 @@ require('lazy').setup({
 	},
 
 	{ -- Comments - gc to comment
-		'numToStr/Comment.nvim',
-		lazy = false,
-		config = function ()
-			require('Comment').setup()
-		end
+		'numToStr/Comment.nvim', lazy = false,
+		config = function () require('Comment').setup() end
 	},
 
     -- Completion
@@ -62,9 +60,8 @@ require('lazy').setup({
     'L3MON4D3/LuaSnip',
     'rafamadriz/friendly-snippets',
 
-    -- LSPs
-    -- 'neovim/nvim-lspconfig',
-    { 'anakin4747/nvim-lspconfig', branch = 'bitbake', },
+    -- LSP
+    'neovim/nvim-lspconfig',
     { 'p00f/clangd_extensions.nvim' },
     { 'folke/neodev.nvim', opts = {} },
 
