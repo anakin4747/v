@@ -1,6 +1,14 @@
 
 
+LSP:Goto next reference 
+
 Have the hover menu print the man page for the function if available
+
+Have a way to show type definitions in a hover menu instead of having to jump
+or atleast have the option between the two
+
+Add a way to choose to get your lsp information in a hover window, a popup
+window, in a split or jumping to the requested information
 
 null-ls
 
@@ -15,6 +23,10 @@ Have the menu have memory form the previous run
 Have the menu also find executable files for you to choose from
 the menu could also provide an option to build maybe
 
+make lsp responses that appear on the same line just take you to that line
+instead of showing you a quickfix menu with two options that bring to the same
+line - its annoying
+
 
 Look into nvim-libmodal
     - See if you could have a debug mode so that you don't need to prefix
@@ -22,3 +34,4 @@ Look into nvim-libmodal
     - Diagnostic mode? idk maybe
     - i bet there are a bunch of ways to use this
 
+    - resize mode so that you can resize with hjkl and exit with esc
