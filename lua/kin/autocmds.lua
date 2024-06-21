@@ -6,15 +6,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
         vim.highlight.on_yank()
     end,
     pattern = '*',
+    desc = "Highlight text on yank"
 })
 
 -- Auto Unfold All Folds
 vim.api.nvim_create_autocmd('BufRead', {
     group = vim.api.nvim_create_augroup('Unfold', { clear = true }),
     callback = function()
-        vim.cmd('norm zR')
+        if vim.o.foldmethod == 'indent' then vim.cmd('norm zR') end
     end,
     pattern = '*',
+    desc = "Unfold all folds that get folded automatically by foldmethod=indent"
 })
 
 -- Make on Write for LaTeX files
@@ -33,4 +35,5 @@ vim.api.nvim_create_autocmd('BufWritePost', {
         end
     end,
     pattern = '*.tex',  -- Trigger only on LaTeX file writes
+    desc = "Run make on write if in a LaTeX file"
 })
