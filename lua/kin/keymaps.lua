@@ -3,7 +3,6 @@
 -- Only other place for sure that they are set are in my tmux plugin and
 -- cmp.lua
 
-local opts = { noremap = true, silent = true }
 
 vim.g.mapleader = " "
 
@@ -13,74 +12,77 @@ local dap, dapui = require("dap"), require("dapui")
 -- local ui_widgets = require('dap.ui.widgets')
 
 local global_keymaps = {
+    -- { mode, lhs, rhs, description }
 
     -- Navigate buffers
-    { "n", "<S-l>", ":bnext<CR>",     opts },
-    { "n", "<S-h>", ":bprevious<CR>", opts },
+    { "n", "<S-l>", ":bnext<CR>", "Go to next buffer" },
+    { "n", "<S-h>", ":bprevious<CR>", "Go to previous buffer" },
 
     -- Toggle crosshair
-    { "n", "<leader>ch", ":set invcuc | set invcul<CR>", opts },
+    { "n", "<leader>ch", ":set invcuc | set invcul<CR>", "Toggle crosshair" },
 
     -- Keep cursor postion with J
-    { "n", "J", "mzJ`z", opts },
+    { "n", "J", "mzJ`z", "Keeps cursor in place when using `J`" },
 
     -- Center after jumps
-    { "n", "<C-d>", "<C-d>zz", opts },
-    { "n", "<C-u>", "<C-u>zz", opts },
-    { "n", "n", "nzzzv", opts },
-    { "n", "N", "Nzzzv", opts },
+    { "n", "<C-d>", "<C-d>zz", "Center after <C-d>" },
+    { "n", "<C-u>", "<C-u>zz", "Center after <C-u>" },
+    { "n", "n", "nzzzv", "Center after next match" },
+    { "n", "N", "Nzzzv", "Center after previous match" },
+
+    -- Terminal
+    { 't', '<esc><esc>', '<C-\\><C-n>',  "Double <esc> to exit terminal mode" },
+    { 't', '<A-h>', '<C-\\><C-n><C-w>h', "Exit terminal and move left" },
+    { 't', '<A-j>', '<C-\\><C-n><C-w>j', "Exit terminal and move down" },
+    { 't', '<A-k>', '<C-\\><C-n><C-w>k', "Exit terminal and move up" },
+    { 't', '<A-l>', '<C-\\><C-n><C-w>l', "Exit terminal and move right" },
 
     -- Undotree
-    { "n", "<leader>ut", vim.cmd.UndotreeToggle },
+    { "n", "<leader>ut", vim.cmd.UndotreeToggle, "Toggle undotree" },
 
     -- Telescope
-    { 'n', '<leader>au', builtin.autocommands, opts },
-    { 'n', '<leader>b',  builtin.buffers,      opts },
-    { 'n', '<leader>fd', builtin.fd,           opts },
-    {
-        'n', '<leader>ff',
-        function ()
-            local success, _ = pcall(builtin.git_files)
-            if not success then builtin.find_files() end
-        end,
-        opts
-    },
-    { 'n', '<leader>fg', builtin.live_grep,   opts },
-    { 'n', '<leader>gbc', builtin.git_bcommits, opts },
-    { 'n', '<leader>gc', builtin.git_commits, opts },
-    { 'n', '<leader>gr', builtin.grep_string, opts },
-    { 'n', '<leader>gs', builtin.git_status, opts },
-    { 'n', '<leader>fh', builtin.help_tags,   opts },
-    { 'n', '<leader>km', builtin.keymaps,     opts },
-    { 'n', '<leader>m', builtin.man_pages,     opts },
-    { 'n', '<leader>of', builtin.oldfiles,     opts },
-    { 'n', '<leader>qf', builtin.quickfix,     opts },
-    { 'n', '<leader>rg', builtin.registers,     opts },
-    { 'n', '<leader>ts', builtin.treesitter,  opts },
-    { 'n', '<leader><C-o>', builtin.resume,  opts },
-    { 'n', '<leader>&', builtin.vim_options,  opts },
+    { 'n', '<leader>au',    builtin.autocommands, "Telescope :autocmd" },
+    { 'n', '<leader>bu',    builtin.buffers,      "Telescope :buffers" },
+    { 'n', '<leader>fd',    builtin.fd,           "Telescope !fd" },
+    { 'n', '<leader>ff',    builtin.find_files,   "Telescope find files" },
+    { 'n', '<leader>gf',    builtin.git_files,    "Telescope git files" },
+    { 'n', '<leader>fg',    builtin.live_grep,    "Telescope live grep" },
+    { 'n', '<leader>gbc',   builtin.git_bcommits, "Telescope current buffer's git commits" },
+    { 'n', '<leader>gc',    builtin.git_commits,  "Telescope current git commits" },
+    { 'n', '<leader>gr',    builtin.grep_string,  "Telescope grep -r word under cursor" },
+    { 'n', '<leader>gs',    builtin.git_status,   "Telescope !git status" },
+    { 'n', '<leader>fh',    builtin.help_tags,    "Telescope help_tags" },
+    { 'n', '<leader>km',    builtin.keymaps,      "Telescope keymaps" },
+    { 'n', '<leader>m',     builtin.man_pages,    "Telescope man pages" },
+    { 'n', '<leader>of',    builtin.oldfiles,     "Telescope :oldfiles" },
+    { 'n', '<leader>qf',    builtin.quickfix,     "Telescope quickfix list" },
+    { 'n', '<leader>rg',    builtin.registers,    "Telescope :registers" },
+    { 'n', '<leader>ts',    builtin.treesitter,   "Telescope treesitter symbols" },
+    { 'n', '<leader><C-o>', builtin.resume,       "Reopen last telescope window" },
+    { 'n', '<leader>&',     builtin.vim_options,  "Telescope Vim options" },
 
     -- Diagnostics
-    { 'n', '<leader>e',  vim.diagnostic.open_float, opts },
-    { 'n', '[d',         vim.diagnostic.goto_prev,  opts },
-    { 'n', ']d',         vim.diagnostic.goto_next,  opts },
-    { 'n', '<leader>q',  vim.diagnostic.setloclist, opts },
+    { 'n', '<leader>e', vim.diagnostic.open_float, "Open diagnostics in floating window" },
+    { 'n', '[d',        vim.diagnostic.goto_prev,  "Go to previous error" },
+    { 'n', ']d',        vim.diagnostic.goto_next,  "Go to next error" },
+    -- { 'n', '<leader>q', vim.diagnostic.setloclist, "idk" },
 
     -- Debugging
-    { 'n', '<leader>c',  dap.continue,          opts },
-    { 'n', '<leader>n',  dap.step_over,         opts },
-    { 'n', '<leader>si', dap.step_into,         opts },
-    { 'n', '<leader>so', dap.step_out,          opts },
-    { 'n', '<leader>b',  dap.toggle_breakpoint, opts }, -- TODO add logic to set signcolumn = "no" if there are no more brkpnts
+    { 'n', '<leader>c',  dap.continue,          "Start or continue debugging" },
+    { 'n', '<leader>n',  dap.step_over,         "Debug: Step over" },
+    { 'n', '<leader>si', dap.step_into,         "Debug: Step into" },
+    { 'n', '<leader>so', dap.step_out,          "Debug: Step out" },
+    { 'n', '<leader>b',  dap.toggle_breakpoint, "Debug: Toggle breakpoint" }, -- TODO add logic to set signcolumn = "no" if there are no more brkpnts
+    { 'n', '<leader>dr', dap.repl.open,         "Open debugger REPL" },
 
-    { 'n', '<leader>lp', function()
-        dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
-    end, opts },
+    --- Debugging UI
+    { 'n', '<leader>uo', dapui.open,    "Open debugger UI" },
+    { 'n', '<leader>uc', dapui.close,   "Close debugger UI" },
 
-    { 'n', '<leader>dr', dap.repl.open },
-    { 'n', '<leader>uo', dapui.open },
-    { 'n', '<leader>uc', dapui.close },
     -- TODO Learn these first before implementing them
+    -- { 'n', '<leader>lp', function()
+    --     dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))
+    -- end, opts },
     -- { 'n',          '<leader>dl', dap.run_last },
     -- { { 'n', 'v' }, '<leader>dh', ui_widgets.hover },
     -- { { 'n', 'v' }, '<leader>dp', ui_widgets.preview },
@@ -109,11 +111,12 @@ local global_keymaps = {
     --     end
     -- end, { silent = true } },
     -- { 'n', '<leader><leader>s', '<cmd>source ~/.arch.files/.config/nvim/lua/kin/snip.lua<CR>', },
-
 }
 
 for _, keymap in ipairs(global_keymaps) do
-    vim.keymap.set(unpack(keymap))
+    local mode, lhs, rhs, desc = unpack(keymap)
+    local opts = { noremap = true, silent = true, desc = desc }
+    vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 
@@ -125,28 +128,31 @@ vim.api.nvim_create_autocmd('LspAttach', {
         -- Enable completion triggered by <c-x><c-o>
         vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-        -- Buffer local mappings.
-        -- See `:help vim.lsp.*` for documentation on any of the below functions
-        local opts = { buffer = ev.buf }
+        local b = vim.lsp.buf
 
         local buffer_keymaps = {
-            { 'n',          'gD',         vim.lsp.buf.declaration,                                                 opts },
-            { 'n',          'gd',         vim.lsp.buf.definition,                                                  opts },
-            { 'n',          'gr',         vim.lsp.buf.references,                                                  opts },
-            { 'n',          'gt',         vim.lsp.buf.type_definition,                                             opts },
-            { 'n',          'gi',         vim.lsp.buf.implementation,                                              opts },
-            { 'n',          'K',          vim.lsp.buf.hover,                                                       opts },
-            { 'n',          '<C-k>',      vim.lsp.buf.signature_help,                                              opts },
-            { 'n',          '<leader>r',  vim.lsp.buf.rename,                                                      opts },
-            { 'n',          '<leader>wa', vim.lsp.buf.add_workspace_folder,                                        opts },
-            { 'n',          '<leader>wr', vim.lsp.buf.remove_workspace_folder,                                     opts },
-            { 'n',          '<leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts },
-            { { 'n', 'v' }, '<leader>Ca', vim.lsp.buf.code_action,                                                 opts },
-            { 'n',          '<leader>f',  function() vim.lsp.buf.format { async = true } end,                      opts },
+            -- { mode, lhs, rhs, description }
+            { 'n', 'gD',        b.declaration,     "LSP: Go to declaration" },
+            { 'n', 'gd',        b.definition,      "LSP: Go to definition" },
+            { 'n', 'gr',        b.references,      "LSP: Get references" },
+            { 'n', 'gt',        b.type_definition, "LSP: Go to type definition" },
+            { 'n', 'gi',        b.implementation,  "LSP: Go to implementation" },
+            { 'n', 'K',         b.hover,           "LSP: Hover documentation" },
+            { 'n', '<C-k>',     b.signature_help,  "LSP: Signature help" },
+            { 'n', '<leader>r', b.rename,          "LSP: Project global rename" },
+            { 'n', '<leader>f', function() b.format { async = true } end, "LSP: Format" },
+
+            -- TODO: Figure out if you actually would use these
+            -- { 'n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts },
+            -- { 'n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, opts },
+            -- { 'n', '<leader>wl', vim.lsp.buf.list_workspace_folders, opts },
+            -- { 'n', '<leader>Ca', vim.lsp.buf.code_action, opts },
         }
 
         for _, keymap in ipairs(buffer_keymaps) do
-            vim.keymap.set(unpack(keymap))
+            local mode, lhs, rhs, desc = unpack(keymap)
+            local opts = { buffer = ev.buf, noremap = true, silent = true, desc = desc }
+            vim.keymap.set(mode, lhs, rhs, opts)
         end
     end,
 })
