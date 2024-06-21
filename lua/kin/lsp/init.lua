@@ -15,6 +15,7 @@ local default_ls_configs = {
     -- 'mesonlsp',
     'pyright',
     'tsserver',
+    'vimls',
 }
 
 -- setup default lsp configs
