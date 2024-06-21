@@ -31,6 +31,7 @@ local global_keymaps = {
     { "n", "N", "Nzzzv", "Center after previous match" },
 
     -- Terminal
+    { 'n', '<leader>t', ':terminal<cr>', "Open a terminal" },
     { 't', '<esc><esc>', '<C-\\><C-n>',  "Double <esc> to exit terminal mode" },
     { 't', '<A-h>', '<C-\\><C-n><C-w>h', "Exit terminal and move left" },
     { 't', '<A-j>', '<C-\\><C-n><C-w>j', "Exit terminal and move down" },
@@ -60,6 +61,7 @@ local global_keymaps = {
     { 'n', '<leader>ts',    builtin.treesitter,   "Telescope treesitter symbols" },
     { 'n', '<leader><C-o>', builtin.resume,       "Reopen last telescope window" },
     { 'n', '<leader>&',     builtin.vim_options,  "Telescope Vim options" },
+    -- { 'n', '<leader>ts',    builtin.treesitter,   "Telescope treesitter symbols" },
 
     -- Diagnostics
     { 'n', '<leader>e', vim.diagnostic.open_float, "Open diagnostics in floating window" },
