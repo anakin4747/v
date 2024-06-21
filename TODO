@@ -27,6 +27,11 @@ make lsp responses that appear on the same line just take you to that line
 instead of showing you a quickfix menu with two options that bring to the same
 line - its annoying
 
+if no references are seen by the lsp, fallback to just grepping the codebase
+for the exact string of the vairable.
+
+For every LSP action have a fallback so that you still do something if the lsp
+fails.
 
 Look into nvim-libmodal
     - See if you could have a debug mode so that you don't need to prefix
