@@ -11,6 +11,7 @@ local includes = {
     'options',
     -- 'snip',
     'telescope',
+    'terminal',
     'treesitter',
 }
 
