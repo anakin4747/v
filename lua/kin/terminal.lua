@@ -1,28 +1,34 @@
 
 local term_group = vim.api.nvim_create_augroup('TerminalOptionsGroup', { clear = true })
 
+local function set_term_buf_opts ()
+    vim.cmd [[
+        setlocal cmdheight=0 laststatus=0 modifiable nonumber norelativenumber noruler noshowcmd
+    ]]
+end
+
 vim.api.nvim_create_autocmd('TermOpen', {
     group = term_group,
-    callback = function()
-        vim.api.nvim_exec2([[
-            setlocal nonumber
-            setlocal norelativenumber
-            setlocal laststatus=0
-        ]], {})
-    end,
-    desc = 'Set terminal specific options',
+    callback = set_term_buf_opts,
+    desc = 'Enable terminal options when opening a new terminal',
 })
 
 vim.api.nvim_create_autocmd('BufEnter', {
     group = term_group,
-    command = 'setlocal laststatus=0',
+    callback = set_term_buf_opts,
     pattern = 'term://*',
-    desc = 'Disable status line if entering a terminal buffer',
+    desc = 'Enable terminal options when entering a terminal buffer',
 })
+
+local function unset_term_buf_opts ()
+    vim.cmd [[
+        set cmdheight=1 laststatus=2 ruler showcmd
+    ]]
+end
 
 vim.api.nvim_create_autocmd('BufLeave', {
     group = term_group,
-    command = 'setlocal laststatus=2',
+    callback = unset_term_buf_opts,
     pattern = 'term://*',
-    desc = 'Enable status line if leaving a terminal buffer',
+    desc = 'Disable terminal options when leaving a terminal buffer',
 })
