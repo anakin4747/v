@@ -48,6 +48,14 @@ local global_keymaps = {
     { "n", "n", "nzzzv", "Center after next match" },
     { "n", "N", "Nzzzv", "Center after previous match" },
 
+    -- ZZ only works in nested nvim sessions
+    { 'n', 'ZZ', function ()
+        if os.getenv('NVIM') ~= nil then
+            if not pcall(vim.cmd, 'wq!') then
+                vim.cmd('q!')
+            end
+        end
+    end, 'ZZ only wq! for nested nvim instances' },
 
     -- Undotree
     { "n", "<leader>ut", vim.cmd.UndotreeToggle, "Toggle undotree" },
