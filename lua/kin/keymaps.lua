@@ -18,6 +18,18 @@ local global_keymaps = {
     { "n", "<S-l>", ":bnext<CR>", "Go to next buffer" },
     { "n", "<S-h>", ":bprevious<CR>", "Go to previous buffer" },
 
+    { { 'n', 'i', 'v', 'x', }, '<M-h>', '<C-w>h', 'Move to left window' },
+    { { 'n', 'i', 'v', 'x', }, '<M-j>', '<C-w>j', 'Move to lower window' },
+    { { 'n', 'i', 'v', 'x', }, '<M-k>', '<C-w>k', 'Move to higher window' },
+    { { 'n', 'i', 'v', 'x', }, '<M-l>', '<C-w>l', 'Move to right window' },
+    -- Terminal
+    { 't', '<M-h>', '<C-\\><C-n><C-w>h', "Exit terminal and move left" },
+    { 't', '<M-j>', '<C-\\><C-n><C-w>j', "Exit terminal and move down" },
+    { 't', '<M-k>', '<C-\\><C-n><C-w>k', "Exit terminal and move up" },
+    { 't', '<M-l>', '<C-\\><C-n><C-w>l', "Exit terminal and move right" },
+    { 't', '<esc><esc>', '<C-\\><C-n>',  "Double <esc> to exit terminal mode" },
+    { 'n', '<leader>t', ':terminal<cr>', "Open a terminal" },
+
     -- Toggle crosshair
     { "n", "<leader>ch", ":set invcuc | set invcul<CR>", "Toggle crosshair" },
 
@@ -30,13 +42,6 @@ local global_keymaps = {
     { "n", "n", "nzzzv", "Center after next match" },
     { "n", "N", "Nzzzv", "Center after previous match" },
 
-    -- Terminal
-    { 'n', '<leader>t', ':terminal<cr>', "Open a terminal" },
-    { 't', '<esc><esc>', '<C-\\><C-n>',  "Double <esc> to exit terminal mode" },
-    { 't', '<A-h>', '<C-\\><C-n><C-w>h', "Exit terminal and move left" },
-    { 't', '<A-j>', '<C-\\><C-n><C-w>j', "Exit terminal and move down" },
-    { 't', '<A-k>', '<C-\\><C-n><C-w>k', "Exit terminal and move up" },
-    { 't', '<A-l>', '<C-\\><C-n><C-w>l', "Exit terminal and move right" },
 
     -- Undotree
     { "n", "<leader>ut", vim.cmd.UndotreeToggle, "Toggle undotree" },
@@ -50,7 +55,7 @@ local global_keymaps = {
     { 'n', '<leader>ff',    builtin.find_files,   "Telescope find files" },
     { 'n', '<leader>fg',    builtin.live_grep,    "Telescope live grep" },
     { 'n', '<leader>fh',    builtin.help_tags,    "Telescope help_tags" },
-    { 'n', '<leader>gbc',   builtin.git_bcommits, "Telescope current buffer's git commits" },
+    { 'n', '<leader>gbc',   builtin.git_bcommits, "Telescope  current buffer's git commits" },
     { 'n', '<leader>gc',    builtin.git_commits,  "Telescope current git commits" },
     { 'n', '<leader>gf',    builtin.git_files,    "Telescope git files" },
     { 'n', '<leader>gr',    builtin.grep_string,  "Telescope grep -r word under cursor" },
@@ -77,8 +82,8 @@ local global_keymaps = {
     { 'n', '<leader>dr', dap.repl.open,         "Open debugger REPL" },
 
     --- Debugging UI
-    { 'n', '<leader>uo', dapui.open,    "Open debugger UI" },
-    { 'n', '<leader>uc', dapui.close,   "Close debugger UI" },
+    { 'n', '<leader>uo', dapui.open,  "Open debugger UI" },
+    { 'n', '<leader>uc', dapui.close, "Close debugger UI" },
 
     -- TODO Learn these first before implementing them
     -- { 'n', '<leader>lp', function()
