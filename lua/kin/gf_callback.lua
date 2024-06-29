@@ -5,7 +5,7 @@ local function file_exists(filename)
     return false
 end
 
-local function gf_callback()
+return function()
 
     local cwd = ""
 
@@ -27,20 +27,20 @@ local function gf_callback()
     --]]
     if file_exists(abs_file_path) then
         vim.cmd("edit " .. abs_file_path)
-        print("terminal.lua: gf_callback: opened `" .. cfile .. "` in cwd:`" .. cwd .. "`")
+        print("gf_callback.lua: opened `" .. cfile .. "` in cwd.lua:`" .. cwd .. "`")
         return
     end
 
     -- Make here below async
-    print("terminal.lua: gf_callback: not a complete path. SEARCHING " .. cwd)
+    print("gf_callback.lua: not a complete path. SEARCHING " .. cwd)
 
     local find_cmd = ""
 
     if cfile:find('/') then
-        -- print("terminal.lua: gf_callback: slashes in <cfile>")
+        -- print("gf_callback.lua: slashes in <cfile>")
         find_cmd = "find " .. cwd .. " -path '*" .. cfile .. "*' 2> /dev/null"
     else
-        -- print("terminal.lua: gf_callback: no slashes in <cfile>")
+        -- print("gf_callback.lua: no slashes in <cfile>")
         find_cmd = "find " .. cwd .. " -name " .. cfile .. " 2> /dev/null"
     end
 
@@ -59,7 +59,7 @@ local function gf_callback()
         return
     end
 
-    print("terminal.lua: gf_callback: more than one find")
+    print("gf_callback.lua: more than one find")
 
     local qf_items = {}
 
@@ -82,4 +82,3 @@ local function gf_callback()
     vim.cmd('copen')
 end
 
-return gf_callback
