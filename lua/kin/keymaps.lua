@@ -11,6 +11,8 @@ local builtin = require('telescope.builtin')
 local dap, dapui = require("dap"), require("dapui")
 -- local ui_widgets = require('dap.ui.widgets')
 
+local gf_callback = require("kin.gf_callback")
+
 local global_keymaps = {
     -- { mode, lhs, rhs, description }
 
@@ -22,6 +24,10 @@ local global_keymaps = {
     { { 'n', 'i', 'v', 'x', }, '<M-j>', '<C-w>j', 'Move to lower window' },
     { { 'n', 'i', 'v', 'x', }, '<M-k>', '<C-w>k', 'Move to higher window' },
     { { 'n', 'i', 'v', 'x', }, '<M-l>', '<C-w>l', 'Move to right window' },
+
+    -- Goto file
+    { 'n', 'gf', gf_callback, 'PWD aware goto file' },
+
     -- Terminal
     { 't', '<M-h>', '<C-\\><C-n><C-w>h', "Exit terminal and move left" },
     { 't', '<M-j>', '<C-\\><C-n><C-w>j', "Exit terminal and move down" },
