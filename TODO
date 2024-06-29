@@ -1,6 +1,6 @@
 
 
-LSP:Goto next reference 
+LSP:Goto next reference
 
 Have the hover menu print the man page for the function if available
 
@@ -32,6 +32,18 @@ for the exact string of the vairable.
 
 For every LSP action have a fallback so that you still do something if the lsp
 fails.
+
+Add ctrl-l to terminal mode so that clearing doesnt acutallt clear the buffer
+but just scrolls up
+
+Hook into <C-k> man pages to open them in a vertical split instead of
+horizontal
+
+Make it so that you can get lsp completion from the command line insert mode.
+Make the terminal buffer a double buffer, one that you can modify and one that
+is the acutal immutable output of the terminal. This makes it so that you can
+edit anywhere like editing a file path to then `gf` to. Or just properly edit
+your command line input.
 
 Look into nvim-libmodal
     - See if you could have a debug mode so that you don't need to prefix
