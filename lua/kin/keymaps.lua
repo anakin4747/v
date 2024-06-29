@@ -1,8 +1,4 @@
 -- Try to keep all keymaps here
---
--- Only other place for sure that they are set are in my tmux plugin and
--- cmp.lua
-
 
 vim.g.mapleader = " "
 
@@ -48,11 +44,16 @@ local global_keymaps = {
     { "n", "n", "nzzzv", "Center after next match" },
     { "n", "N", "Nzzzv", "Center after previous match" },
 
-    -- ZZ only works in nested nvim sessions
+    -- ZZ closes non-terminal buffers or single windows
     { 'n', 'ZZ', function ()
-        if os.getenv('NVIM') ~= nil then
-            if not pcall(vim.cmd, 'wq!') then
-                vim.cmd('q!')
+        if #vim.api.nvim_list_wins() ~= 1 then
+            vim.cmd("bd!")
+            return
+        end
+
+        for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+            if vim.fn.getbufvar(bufnr, '&buftype') ~= 'terminal' then
+                vim.api.nvim_buf_delete(bufnr, { force = true })
             end
         end
     end, 'ZZ only wq! for nested nvim instances' },
