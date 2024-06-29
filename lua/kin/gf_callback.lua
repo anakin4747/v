@@ -27,7 +27,7 @@ return function()
     --]]
     if file_exists(abs_file_path) then
         vim.cmd("edit " .. abs_file_path)
-        print("gf_callback.lua: opened `" .. cfile .. "` in cwd.lua:`" .. cwd .. "`")
+        -- print("gf_callback.lua: opened `" .. cfile .. "` in cwd:`" .. cwd .. "`")
         return
     end
 
@@ -53,6 +53,11 @@ return function()
     local paths = vim.split(find_stdout, "\n")
 
     -- print(#lines)
+    if #paths == 1 then
+        -- exit if empty
+        print("gf_callback.lua: no file found")
+        return
+    end
 
     if #paths == 2 then
         vim.cmd("edit " .. paths[1])
