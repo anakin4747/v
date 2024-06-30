@@ -18,6 +18,12 @@ return function()
     end
 
     local cfile = vim.fn.expand("<cfile>")
+
+    if file_exists(cfile) then
+        vim.cmd("edit " .. cfile)
+        return
+    end
+
     local abs_file_path = cwd .. "/" .. cfile
 
     --[[
