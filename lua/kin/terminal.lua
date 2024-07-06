@@ -24,7 +24,9 @@ vim.api.nvim_create_autocmd('BufEnter', {
 })
 
 local function unset_term_buf_opts()
-    vim.cmd [[ set cmdheight=1 laststatus=2 ruler showcmd ]]
+    vim.cmd [[
+        set cmdheight=1 laststatus=2 ruler showcmd scrolloff=9
+    ]]
 end
 
 vim.api.nvim_create_autocmd('BufLeave', {
