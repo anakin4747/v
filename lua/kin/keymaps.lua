@@ -9,6 +9,21 @@ local dap, dapui = require("dap"), require("dapui")
 
 local gf_callback = require("kin.gf_callback")
 
+local function ZZ()
+    if #vim.api.nvim_list_wins() ~= 1 then
+        vim.cmd("silent w | bd!")
+        return
+    end
+
+    vim.cmd("silent wa!")
+    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.fn.getbufvar(bufnr, '&buftype') ~= 'terminal' then
+            -- TODO You want this to write the file before closing
+            vim.api.nvim_buf_delete(bufnr, { force = true })
+        end
+    end
+end
+
 local global_keymaps = {
     -- { mode, lhs, rhs, description }
 
@@ -52,18 +67,7 @@ local global_keymaps = {
     { "n", "N", "Nzzzv", "Center after previous match" },
 
     -- ZZ closes non-terminal buffers or single windows
-    { 'n', 'ZZ', function ()
-        if #vim.api.nvim_list_wins() ~= 1 then
-            vim.cmd("bd!")
-            return
-        end
-
-        for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-            if vim.fn.getbufvar(bufnr, '&buftype') ~= 'terminal' then
-                vim.api.nvim_buf_delete(bufnr, { force = true })
-            end
-        end
-    end, 'ZZ only wq! for nested nvim instances' },
+    { 'n', 'ZZ', ZZ, 'ZZ only wq! for nested nvim instances' },
 
     -- Undotree
     { "n", "<leader>ut", vim.cmd.UndotreeToggle, "Toggle undotree" },
