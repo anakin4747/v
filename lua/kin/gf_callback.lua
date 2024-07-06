@@ -5,7 +5,7 @@ local function file_exists(filename)
     return false
 end
 
-return function()
+local function gf_callback()
 
     local cwd = ""
 
@@ -21,6 +21,7 @@ return function()
 
     if file_exists(cfile) then
         vim.cmd("edit " .. cfile)
+        -- print("gf_callback.lua: opened `" .. cfile .. "` in cwd:`" .. cwd .. "`")
         return
     end
 
@@ -93,3 +94,4 @@ return function()
     vim.cmd('copen')
 end
 
+return gf_callback
