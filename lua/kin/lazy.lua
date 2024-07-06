@@ -76,6 +76,9 @@ require('lazy').setup({
         end,
     },
 
+    -- Tab local buffers
+    'tiagovla/scope.nvim',
+
     {
         'williamboman/mason.nvim',
         config = function ()

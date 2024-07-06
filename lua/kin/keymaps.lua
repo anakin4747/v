@@ -16,6 +16,10 @@ local global_keymaps = {
     { "n", "<S-l>", ":bnext<CR>", "Go to next buffer" },
     { "n", "<S-h>", ":bprevious<CR>", "Go to previous buffer" },
 
+    -- Navigate tabs
+    { "n", "<C-l>", ":tabNext<CR>", "Go to next tab" },
+    { "n", "<C-h>", ":tabprevious<CR>", "Go to previous tab" },
+
     { { 'n', 'i', 'v', 'x', }, '<M-h>', '<C-w>h', 'Move to left window' },
     { { 'n', 'i', 'v', 'x', }, '<M-j>', '<C-w>j', 'Move to lower window' },
     { { 'n', 'i', 'v', 'x', }, '<M-k>', '<C-w>k', 'Move to higher window' },

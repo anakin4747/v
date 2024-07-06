@@ -10,6 +10,7 @@ local includes = {
     'lsp',
     'options',
     -- 'snip',
+    'scope',
     'telescope',
     'terminal',
     'treesitter',
