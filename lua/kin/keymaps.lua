@@ -25,6 +25,9 @@ local global_keymaps = {
     { { 'n', 'i', 'v', 'x', }, '<M-k>', '<C-w>k', 'Move to higher window' },
     { { 'n', 'i', 'v', 'x', }, '<M-l>', '<C-w>l', 'Move to right window' },
 
+    -- Resize mode
+    { "n", "<leader>rs", toggle_resize_mode, "Toggle resize mode" },
+
     -- Goto file
     { 'n', 'gf', gf_callback, 'PWD aware goto file' },
 
