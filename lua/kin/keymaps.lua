@@ -9,6 +9,8 @@ local dap, dapui = require("dap"), require("dapui")
 
 local gf_callback = require("kin.gf_callback")
 
+local toggle_resize_mode = require("kin.resize")
+
 local function ZZ()
     if #vim.api.nvim_list_wins() ~= 1 then
         vim.cmd("silent w | bd!")
