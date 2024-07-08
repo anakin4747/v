@@ -5,9 +5,6 @@ local function set_term_buf_opts()
     vim.cmd [[
         setlocal cmdheight=0 laststatus=0 modifiable nonumber norelativenumber noruler noshowcmd
     ]]
-    local cwd_cmd = "readlink -e /proc/" .. vim.b.terminal_job_pid .. "/cwd"
-    local cwd = vim.fn.system(cwd_cmd):sub(1, -2)
-    vim.cmd("cd " .. cwd)
 end
 
 vim.api.nvim_create_autocmd('TermOpen', {
