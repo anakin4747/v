@@ -41,6 +41,7 @@ local function resize_by_dir(direction, amount)
         end
     else
         print("Invalid direction")
+        return
     end
 
     vim.cmd(cmd .. amount)
