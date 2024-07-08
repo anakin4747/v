@@ -46,6 +46,7 @@
   that is the acutal immutable output of the terminal. This makes it so that
   you can edit anywhere like editing a file path to then `gf` to. Or just
   properly edit your command line input.
+- Add commands to open a terminal split or a vertical terminal split
 
 # Modes
 - Look into nvim-libmodal
