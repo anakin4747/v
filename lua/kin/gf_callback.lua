@@ -17,7 +17,8 @@ local function gf_callback()
         cwd = vim.loop.cwd() or ""
     end
 
-    local cfile = vim.fn.expand("<cfile>")
+    -- Expand twice since the expaded <cfile> might contain unexpanded symbols like `~`
+    local cfile = vim.fn.expand(vim.fn.expand("<cfile>"))
 
     if file_exists(cfile) then
         vim.cmd("edit " .. cfile)
