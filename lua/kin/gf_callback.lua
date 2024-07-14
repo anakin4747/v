@@ -7,6 +7,15 @@ end
 
 local function gf_callback()
 
+    -- Expand twice since the expanded <cfile> might contain unexpanded symbols like `~`
+    local cfile = vim.fn.expand(vim.fn.expand("<cfile>"))
+
+    if file_exists(cfile) then
+        vim.cmd("edit " .. cfile)
+        -- print("gf_callback.lua: opened `" .. cfile .. "` in cwd:`" .. cwd .. "`")
+        return
+    end
+
     local cwd = ""
 
     local pid = vim.b.terminal_job_pid
@@ -17,21 +26,13 @@ local function gf_callback()
         cwd = vim.loop.cwd() or ""
     end
 
-    -- Expand twice since the expaded <cfile> might contain unexpanded symbols like `~`
-    local cfile = vim.fn.expand(vim.fn.expand("<cfile>"))
-
-    if file_exists(cfile) then
-        vim.cmd("edit " .. cfile)
-        -- print("gf_callback.lua: opened `" .. cfile .. "` in cwd:`" .. cwd .. "`")
-        return
-    end
-
     local abs_file_path = cwd .. "/" .. cfile
 
     --[[
     -- BUG:
-    --  if you are in folder1 and want to open folder1/folder2/Makefile
-    --  but there is a folder1/Makefile it will open that instead
+    --  When you are hovering over the word Makefile and if you are in folder1
+    --  and want to open folder1/folder2/Makefile but there is a
+    --  folder1/Makefile it will open that instead
     --]]
     if file_exists(abs_file_path) then
         vim.cmd("edit " .. abs_file_path)
