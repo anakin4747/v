@@ -3,7 +3,7 @@ local term_group = vim.api.nvim_create_augroup('TerminalOptionsGroup', { clear =
 
 local function set_term_buf_opts()
     vim.cmd [[
-        setlocal cmdheight=0 laststatus=0 modifiable nonumber norelativenumber noruler noshowcmd
+        setlocal modifiable nonumber norelativenumber
     ]]
     local cwd_cmd = "readlink -e /proc/" .. vim.b.terminal_job_pid .. "/cwd"
     local cwd = vim.fn.system(cwd_cmd):sub(1, -2)
@@ -25,7 +25,7 @@ vim.api.nvim_create_autocmd('BufEnter', {
 
 local function unset_term_buf_opts()
     vim.cmd [[
-        set cmdheight=1 laststatus=2 ruler showcmd scrolloff=9
+        set scrolloff=9
     ]]
 end
 
