@@ -55,6 +55,9 @@ local global_keymaps = {
     -- Goto file
     { 'n', 'gf', gf_callback, 'PWD aware goto file' },
 
+    -- Delete tab local buffer
+    { 'n', '<leader>bd', require('tabscope').remove_tab_buffer, 'Delete tab local buffer' },
+
     -- Toggle crosshair
     { 'n', '<leader>ch', ':set invcuc | set invcul<CR>', 'Toggle crosshair' },
 

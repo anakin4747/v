@@ -77,7 +77,10 @@ require('lazy').setup({
     },
 
     -- Tab local buffers
-    'tiagovla/scope.nvim',
+    {
+        'backdround/tabscope.nvim',
+        config = function () require('tabscope').setup() end,
+    },
 
     {
         'williamboman/mason.nvim',
@@ -87,5 +90,4 @@ require('lazy').setup({
     },
 
     -- 'nvim-treesitter/nvim-treesitter-context',
-
 })
