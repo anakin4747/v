@@ -7,23 +7,46 @@ local builtin = require('telescope.builtin')
 local dap, dapui = require('dap'), require('dapui')
 -- local ui_widgets = require('dap.ui.widgets')
 
-local gf_callback = require('kin.gf_callback')
-
-local toggle_resize_mode = require('kin.resize')
+local tabscope = require('tabscope')
 
 local function ZZ()
-    if #vim.api.nvim_list_wins() ~= 1 then
-        vim.cmd('silent w | bd!')
+
+    local buftype  = vim.api.nvim_get_option_value('buftype', {})
+    local filetype = vim.api.nvim_get_option_value('filetype', {})
+    local tabpage  = vim.api.nvim_get_current_tabpage()
+    local windows  = vim.api.nvim_tabpage_list_wins(tabpage)
+
+    if (buftype == 'help' and filetype == 'help') or buftype == 'nowrite' then
+
+        if #windows ~= 1 then vim.api.nvim_win_close(0, true) end
+
         return
     end
 
-    vim.cmd('silent wa!')
-    for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
-        if vim.fn.getbufvar(bufnr, '&buftype') ~= 'terminal' then
-            -- TODO You want this to write the file before closing
-            vim.api.nvim_buf_delete(bufnr, { force = true })
-        end
+    if buftype == 'terminal' then
+        tabscope.remove_tab_buffer()
+
+        -- If last window also quit to avoid annoying no name empty file
+        if #windows == 1 then vim.cmd('quit') end
+
+        return
     end
+
+    if filetype == 'gitcommit' then
+        vim.cmd('write | quit | silent! wincmd c')
+
+        return
+    end
+
+    if buftype == 'nofile' and filetype == 'lspinfo' then
+        -- LspInfo floating window
+        vim.cmd('quit')
+
+        return
+    end
+
+
+    tabscope.remove_tab_buffer()
 end
 
 local global_keymaps = {
@@ -50,13 +73,10 @@ local global_keymaps = {
     { { 'n', 'i', 'v', 'x', 't', }, '<M-l>', '<C-\\><C-n><C-w>l', 'Move to right window' },
 
     -- Resize mode
-    { 'n', '<leader>rs', toggle_resize_mode, 'Toggle resize mode' },
+    { 'n', '<leader>rs', require('kin.resize'), 'Toggle resize mode' },
 
     -- Goto file
-    { 'n', 'gf', gf_callback, 'PWD aware goto file' },
-
-    -- Delete tab local buffer
-    { 'n', '<leader>bd', require('tabscope').remove_tab_buffer, 'Delete tab local buffer' },
+    { 'n', 'gf', require('kin.gf_callback'), 'PWD aware goto file' },
 
     -- Toggle crosshair
     { 'n', '<leader>ch', ':set invcuc | set invcul<CR>', 'Toggle crosshair' },
