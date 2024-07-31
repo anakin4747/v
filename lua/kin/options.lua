@@ -49,6 +49,7 @@ local options = {
     timeoutlen = 1000,                                       -- time to wait for a mapped sequence to complete (in milliseconds)
     undofile = true,                                         -- enable persistent undo
     updatetime = 300,                                        -- faster completion (4000ms default)
+    virtualedit = "all", -- Allows the cursor to go anywhere
     wrap = false,                                            -- display lines as one long line
     -- wrapscan = false,                     -- searches wrap back to the top
     writebackup = true,                                      -- if a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited
