@@ -45,7 +45,7 @@ local function ZZ()
         return
     end
 
-
+    vim.cmd('silent! write')
     tabscope.remove_tab_buffer()
 end
 
