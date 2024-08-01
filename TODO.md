@@ -5,6 +5,7 @@
   lsp fails.
 - Add a way to choose to get your lsp information in a hover window, a popup
   window, in a split or jumping to the requested information
+- Add this^ for everything lsp related
 - Make lsp responses that appear on the same line just take you to that line
   instead of showing you a quickfix menu with two options that bring to the
   same line - its annoying
@@ -21,6 +22,16 @@
 - Add feauture for goto next/prev reference
 - if no references are seen by the lsp, fallback to just grepping the codebase
   for the exact string of the vairable.
+
+# xargs
+- get xargs working with `v` bash function
+
+# VMUX
+- Add a way to store your vim related aliases required for muxing with vim in
+  the codebase and sent out to the required system files on init. For example
+  the bash function `v` and git related commands. In the same manner you did
+  the zsh dependencies. Have the scripts be inside this codebase and just add
+  lines to the other files to source the scripts.
 
 # Omnifunc
 - Learn omnifunc
@@ -46,7 +57,6 @@
   that is the acutal immutable output of the terminal. This makes it so that
   you can edit anywhere like editing a file path to then `gf` to. Or just
   properly edit your command line input.
-- Add commands to open a terminal split or a vertical terminal split
 
 # Modes
 - Look into nvim-libmodal
