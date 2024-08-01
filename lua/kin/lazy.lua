@@ -27,10 +27,6 @@ require('lazy').setup({
 
     'tpope/vim-fugitive',
 
-    -- Tmux Integration
-    'anakin4747/vim-tmux-nav-lua',
-    -- 'christoomey/vim-tmux-navigator',
-
 	{ -- Colorscheme
 		'ellisonleao/gruvbox.nvim',
 		name = 'gruvbox',
@@ -62,7 +58,7 @@ require('lazy').setup({
 
     -- LSP
     'neovim/nvim-lspconfig',
-    { 'p00f/clangd_extensions.nvim' },
+    -- { 'p00f/clangd_extensions.nvim' },
     { 'folke/neodev.nvim', opts = {} },
 
     -- Debug Integration
@@ -71,22 +67,13 @@ require('lazy').setup({
     'rcarriga/nvim-dap-ui',
     {
         'theHamsta/nvim-dap-virtual-text',
-        config = function ()
-            require('nvim-dap-virtual-text').setup()
-        end,
+        config = function () require('nvim-dap-virtual-text').setup() end,
     },
 
     -- Tab local buffers
     {
         'backdround/tabscope.nvim',
         config = function () require('tabscope').setup() end,
-    },
-
-    {
-        'williamboman/mason.nvim',
-        config = function ()
-            require('mason').setup()
-        end,
     },
 
     -- 'nvim-treesitter/nvim-treesitter-context',
