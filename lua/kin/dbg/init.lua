@@ -8,8 +8,6 @@ local includes = {
     'gdb',
 }
 
-local debug = false
-
 -- Makes sure each file required exists and is syntatically correct
 -- Great for still having functionality if part of your config breaks
 for _, file in ipairs(includes) do
@@ -17,7 +15,7 @@ for _, file in ipairs(includes) do
     local success, err = pcall(require, file)
     if success == false then
         local warning = 'dbg/init.lua: failed to require file: ' .. file
-        if debug == true then
+        if vim.g.debug then
             warning = warning .. ' \n ERROR: ' .. err
         end
         vim.notify(warning, vim.log.levels.WARN)

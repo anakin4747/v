@@ -33,7 +33,7 @@ for _, ls_cfg_file in ipairs(custom_config) do
     local success, err = pcall(require, 'kin.lsp.' .. ls_cfg_file)
     if success == false then
         local warning = 'lsp/init.lua: failed to require file: ' .. ls_cfg_file
-        if debug == true then
+        if vim.g.debug then
             warning = warning .. ' \n ERROR: ' .. err
         end
         vim.notify(warning, vim.log.levels.WARN)
