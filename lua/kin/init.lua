@@ -13,6 +13,7 @@ local includes = {
     'telescope',
     'terminal',
     'treesitter',
+    'zsh',
 }
 
 local debug = false
