@@ -9,6 +9,17 @@ local dap, dapui = require('dap'), require('dapui')
 
 local tabscope = require('tabscope')
 
+local function get_tab_local_bufs()
+    local tab_local_bufs = {}
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.bo[buf].buflisted then
+            -- tab_local_bufs:insert(buf)
+            table.insert(tab_local_bufs, buf)
+        end
+    end
+    return tab_local_bufs
+end
+
 local function ZZ()
 
     local buftype  = vim.api.nvim_get_option_value('buftype', {})
@@ -25,9 +36,8 @@ local function ZZ()
 
     if buftype == 'terminal' then
         tabscope.remove_tab_buffer()
-
-        -- If last window also quit to avoid annoying no name empty file
-        if #windows == 1 then vim.cmd('quit') end
+        -- If last window and buffer also quit to avoid annoying no name empty file
+        if #windows == 1 and #get_tab_local_bufs() == 1 then vim.cmd('quit') end
 
         return
     end
