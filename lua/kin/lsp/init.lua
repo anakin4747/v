@@ -14,6 +14,7 @@ local default_ls_configs = {
     'ginko_ls',
     -- 'ltex',
     -- 'mesonlsp',
+    'nil_ls',
     'pyright',
     'tsserver',
     'vimls',
