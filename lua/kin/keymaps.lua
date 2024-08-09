@@ -43,7 +43,7 @@ local function ZZ()
     end
 
     if filetype == 'gitcommit' then
-        vim.cmd('write | quit | silent! wincmd c')
+        vim.cmd('write | quit')
 
         return
     end
