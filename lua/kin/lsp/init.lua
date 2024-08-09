@@ -11,6 +11,7 @@ local default_ls_configs = {
     'clangd',
     'cmake',
     'dockerls',
+    'ginko_ls',
     -- 'ltex',
     -- 'mesonlsp',
     'pyright',
