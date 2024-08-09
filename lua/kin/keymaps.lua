@@ -59,6 +59,28 @@ local function ZZ()
     tabscope.remove_tab_buffer()
 end
 
+local vim_to_awe = {
+    h = 'left',
+    j = 'down',
+    k = 'up',
+    l = 'right',
+}
+
+local function navigate(key)
+
+    local initial_winnr = vim.w.winnr
+    vim.cmd('wincmd ' .. key)
+
+    if initial_winnr ~= vim.w.winnr then return end
+
+    vim.fn.system([[
+        awesome-client '
+            local awful = require("awful")
+            awful.client.focus.global_bydirection("]] .. vim_to_awe[key] .. [[")
+        '
+    ]])
+end
+
 local global_keymaps = {
     -- { mode, lhs, rhs, description }
 
@@ -77,10 +99,10 @@ local global_keymaps = {
     { { 'n', 't', }, '<C-b>v', '<C-\\><C-n>:vert split +terminal<cr>i', 'Open a terminal on the right' },
 
     -- Navigate windows
-    { { 'n', 'i', 'v', 'x', 't', }, '<M-h>', '<C-\\><C-n><C-w>h', 'Move to left window' },
-    { { 'n', 'i', 'v', 'x', 't', }, '<M-j>', '<C-\\><C-n><C-w>j', 'Move to lower window' },
-    { { 'n', 'i', 'v', 'x', 't', }, '<M-k>', '<C-\\><C-n><C-w>k', 'Move to higher window' },
-    { { 'n', 'i', 'v', 'x', 't', }, '<M-l>', '<C-\\><C-n><C-w>l', 'Move to right window' },
+    { { 'n', 'i', 'v', 'x', 't', }, '<M-h>', function () navigate('h') end, 'Move to left window' },
+    { { 'n', 'i', 'v', 'x', 't', }, '<M-j>', function () navigate('j') end, 'Move to lower window' },
+    { { 'n', 'i', 'v', 'x', 't', }, '<M-k>', function () navigate('k') end, 'Move to higher window' },
+    { { 'n', 'i', 'v', 'x', 't', }, '<M-l>', function () navigate('l') end, 'Move to right window' },
 
     -- Resize mode
     { 'n', '<leader>rs', require('kin.resize'), 'Toggle resize mode' },
