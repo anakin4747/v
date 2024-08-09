@@ -104,6 +104,8 @@ local global_keymaps = {
     { { 'n', 'i', 'v', 'x', 't', }, '<M-k>', function () navigate('k') end, 'Move to higher window' },
     { { 'n', 'i', 'v', 'x', 't', }, '<M-l>', function () navigate('l') end, 'Move to right window' },
 
+    { 't', '<C-w>', '<C-\\><C-n><C-w>', 'Terminal wincmds passthrough' },
+
     -- Resize mode
     { 'n', '<leader>rs', require('kin.resize'), 'Toggle resize mode' },
 
