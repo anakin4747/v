@@ -30,6 +30,14 @@ local custom_config = {
     'lua',
 }
 
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "rounded",
+})
+
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+  border = "rounded",
+})
+
 -- safely require all custom config files
 for _, ls_cfg_file in ipairs(custom_config) do
     local success, err = pcall(require, 'kin.lsp.' .. ls_cfg_file)
