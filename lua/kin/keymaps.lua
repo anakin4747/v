@@ -7,41 +7,9 @@ local builtin = require('telescope.builtin')
 local dap, dapui = require('dap'), require('dapui')
 -- local ui_widgets = require('dap.ui.widgets')
 
-local tabscope = require('tabscope')
-
-local function get_tab_local_bufs()
-    local tab_local_bufs = {}
-    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-        if vim.bo[buf].buflisted then
-            -- tab_local_bufs:insert(buf)
-            table.insert(tab_local_bufs, buf)
-        end
-    end
-    return tab_local_bufs
-end
-
-local vim_to_awe = {
-    h = 'left',
-    j = 'down',
-    k = 'up',
-    l = 'right',
-}
-
-local function navigate(key)
-
-    local initial_winnr = vim.w.winnr
-    vim.cmd('wincmd ' .. key)
-
-    if initial_winnr ~= vim.w.winnr then return end
+local navigate = require('kin.navigate')
 local ZZ = require('kin.ZZ')
 
-    vim.fn.system([[
-        awesome-client '
-            local awful = require("awful")
-            awful.client.focus.global_bydirection("]] .. vim_to_awe[key] .. [[")
-        '
-    ]])
-end
 local cmp = require('cmp')
 -- nvim-cmp
 cmp.setup({
