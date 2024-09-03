@@ -20,45 +20,6 @@ local function get_tab_local_bufs()
     return tab_local_bufs
 end
 
-local function ZZ()
-
-    local buftype  = vim.api.nvim_get_option_value('buftype', {})
-    local filetype = vim.api.nvim_get_option_value('filetype', {})
-    local tabpage  = vim.api.nvim_get_current_tabpage()
-    local windows  = vim.api.nvim_tabpage_list_wins(tabpage)
-
-    if (buftype == 'help' and filetype == 'help') or buftype == 'nowrite' then
-
-        if #windows ~= 1 then vim.api.nvim_win_close(0, true) end
-
-        return
-    end
-
-    if buftype == 'terminal' then
-        tabscope.remove_tab_buffer()
-        -- If last window and buffer also quit to avoid annoying no name empty file
-        if #windows == 1 and #get_tab_local_bufs() == 1 then vim.cmd('quit') end
-
-        return
-    end
-
-    if filetype == 'gitcommit' then
-        vim.cmd('write | quit')
-
-        return
-    end
-
-    if buftype == 'nofile' and filetype == 'lspinfo' then
-        -- LspInfo floating window
-        vim.cmd('quit')
-
-        return
-    end
-
-    vim.cmd('silent! write')
-    tabscope.remove_tab_buffer()
-end
-
 local vim_to_awe = {
     h = 'left',
     j = 'down',
@@ -72,6 +33,7 @@ local function navigate(key)
     vim.cmd('wincmd ' .. key)
 
     if initial_winnr ~= vim.w.winnr then return end
+local ZZ = require('kin.ZZ')
 
     vim.fn.system([[
         awesome-client '
