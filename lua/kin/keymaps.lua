@@ -80,6 +80,20 @@ local function navigate(key)
         '
     ]])
 end
+local cmp = require('cmp')
+-- nvim-cmp
+cmp.setup({
+    mapping = {
+        ["<C-space>"] = cmp.mapping.complete(),
+        ["<C-p>"] = cmp.mapping.select_prev_item(),
+        ["<C-n>"] = cmp.mapping.select_next_item(),
+        ["<C-e>"] = cmp.mapping.close(),
+        ["<C-y>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+        }),
+    },
+})
 
 local global_keymaps = {
     -- { mode, lhs, rhs, description }
