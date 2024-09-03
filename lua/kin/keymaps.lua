@@ -33,7 +33,7 @@ local global_keymaps = {
     { 'n', '<S-h>', ':bprevious<CR>', 'Go to previous buffer' },
 
     -- Navigate tabs
-    { { 'n', 't' }, '<C-l>', '<C-\\><C-n>:tabNext<CR>',     'Go to next tab' },
+    { { 'n', 't' }, '<C-l>', '<C-\\><C-n>:tabnext<CR>',     'Go to next tab' },
     { { 'n', 't' }, '<C-h>', '<C-\\><C-n>:tabprevious<CR>', 'Go to previous tab' },
 
     -- Terminal
