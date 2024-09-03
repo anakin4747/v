@@ -12,6 +12,7 @@ local default_ls_configs = {
     'cmake',
     'dockerls',
     'ginko_ls',
+    'gopls',
     -- 'ltex',
     -- 'mesonlsp',
     'nil_ls',
