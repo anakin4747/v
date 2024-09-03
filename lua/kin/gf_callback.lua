@@ -15,12 +15,14 @@ local function gf_wont_callback()
         -- Replace % with \% since :edit will expand it
         local edit_cmd = "edit " .. cfile:gsub("%%", "\\%%")
 
-        -- This enables jumping to line number if present, e.g. `file:12`
-        local line_number = vim.fn.getline('.'):match(cfile .. ":(%d+)")
+        -- This enables jumping to line number if present,
+        -- e.g. `file:12` goes to the 12th line in `file`
+        local line_number = vim.fn.getline('.'):match(cfile:gsub("([^%w])", "%%%1") .. ":(%d+)")
         if line_number ~= nil then
-            edit_cmd = edit_cmd .. " | " .. line_number
+            edit_cmd = "edit +" .. line_number .. " " .. cfile:gsub("%%", "\\%%") .. " | norm zz"
         end
 
+        vim.notify("gf: edit_cmd: " .. edit_cmd)
         vim.cmd(edit_cmd)
 
         return
