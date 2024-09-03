@@ -103,9 +103,9 @@ local function gf_wont_callback()
     local find_cmd = ""
 
     if cfile:find('/') then
-        find_cmd = "find " .. cwd .. exclude_expr() .. " -path '*" .. cfile .. "*'"
+        find_cmd = "find -L " .. cwd .. exclude_expr() .. " -path '*" .. cfile .. "*'"
     else
-        find_cmd = "find " .. cwd .. exclude_expr() .. " -name " .. cfile
+        find_cmd = "find -L " .. cwd .. exclude_expr() .. " -name " .. cfile
     end
 
     find_cmd = find_cmd .. " -print 2> /dev/null"
