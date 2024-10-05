@@ -29,7 +29,9 @@ vim.api.nvim_create_autocmd('BufWritePost', {
         local makefile_exists = vim.fn.filereadable(current_directory .. '/Makefile') == 1
 
         if makefile_exists then
-            vim.cmd('silent make')
+            -- vim.cmd('silent make')
+            vim.loop.spawn('make', {})
+
         else
             print("No Makefile found for LaTeX compilation")
         end
