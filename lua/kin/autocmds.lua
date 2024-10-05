@@ -41,7 +41,7 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 })
 
 vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
+    pattern = "*.lua",
     callback = function()
         local view = vim.fn.winsaveview()
         vim.cmd [[%s/\s\+$//e]]
