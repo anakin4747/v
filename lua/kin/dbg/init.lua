@@ -6,6 +6,7 @@ local includes = {
     'dapui',
     'debugpy',
     'gdb',
+    'security-risk',
 }
 
 -- Makes sure each file required exists and is syntatically correct
