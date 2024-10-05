@@ -14,7 +14,6 @@ local default_ls_configs = {
     'ginko_ls',
     'gopls',
     -- 'ltex',
-    -- 'mesonlsp',
     'nil_ls',
     'pyright',
     'rust_analyzer',
