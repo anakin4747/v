@@ -87,6 +87,18 @@
   that is the acutal immutable output of the terminal. This makes it so that
   you can edit anywhere like editing a file path to then `gf` to. Or just
   properly edit your command line input.
+# Global nvim
+- Global neovim that is only for terminals and you use a nested neovim to edit
+  files.
+- This will keep things closer to how they used to be before you started using
+  terminals in neovim. You will have tabs for each terminal (closer to tmux)
+- <C-b>v, <C-b>s will manipulate the global neovim since they are terminal
+  related
+- The only buffers in the global neovim should only be terminals and the only
+  buffers in the child neovims should only be files.
+- solves a lot of the issues you have relating to a global neovim
+- wont need tab local buffers any more since each child nvim instance will
+  replicate the effect by being different instances.
 
 # Modes
 - Look into nvim-libmodal
@@ -94,3 +106,29 @@
   keybindings with leader
 - Diagnostic mode? idk maybe
 - i bet there are a bunch of ways to use this
+
+# Tabs? buffers?
+
+Maybe no more tabs, causes so many issues. just have high priority buffers
+locked at low indices so that when too many pile up they just can be ignored.
+Maybe no more cycling through buffers. treating buffers more like you do
+windows in you wm.
+
+## Tabs: an old opinion
+<C-w>N goes to the Nth tab 
+<C-W>N moves current buffer to Nth tab
+
+only have buffers stay pinned if I want to otherwise buffer that I just jumped
+to from lsp stuff just disappear (setlocal unlisted??)
+
+No wrap around tab cycling
+No wrap around buffer cycling
+
+Now you can order your buffers and keep track of them
+
+Add to <C-g> a mini little display of the tabs and the buffers in those tabs
+
+Like an overview, also look into naming tabs like tmux that could make you more
+organized
+
+
