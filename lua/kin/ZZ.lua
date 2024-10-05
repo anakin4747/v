@@ -1,7 +1,7 @@
 
 local tabscope = require('tabscope')
 
-local function get_tab_local_bufs()
+function Get_tab_local_bufs()
     local tab_local_bufs = {}
     for _, buf in ipairs(vim.api.nvim_list_bufs()) do
         if vim.bo[buf].buflisted then
