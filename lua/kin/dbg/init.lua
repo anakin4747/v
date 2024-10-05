@@ -15,9 +15,8 @@ for _, file in ipairs(includes) do
     local success, err = pcall(require, file)
     if success == false then
         local warning = 'dbg/init.lua: failed to require file: ' .. file
-        if vim.g.debug then
-            warning = warning .. ' \n ERROR: ' .. err
-        end
+        warning = warning .. '\nERROR: ' .. err
         vim.notify(warning, vim.log.levels.WARN)
     end
 end
+
