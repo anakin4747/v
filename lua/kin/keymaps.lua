@@ -3,14 +3,12 @@
 vim.g.mapleader = ' '
 
 local builtin = require('telescope.builtin')
--- local ls = require('luasnip')
 local dap, dapui = require('dap'), require('dapui')
--- local ui_widgets = require('dap.ui.widgets')
+local cmp = require('cmp')
 
 local navigate = require('kin.navigate')
 local ZZ = require('kin.ZZ')
 
-local cmp = require('cmp')
 -- nvim-cmp
 cmp.setup({
     mapping = {
@@ -41,14 +39,17 @@ local global_keymaps = {
     { 'n', '<leader>t',  ':tabnew +terminal<cr>', 'Open a terminal' },
     { { 'n', 't', }, '<C-b>s', '<C-\\><C-n>:split +terminal<cr>i',      'Open a terminal below' },
     { { 'n', 't', }, '<C-b>v', '<C-\\><C-n>:vert split +terminal<cr>i', 'Open a terminal on the right' },
+    { 't', '<C-w>', '<C-\\><C-n><C-w>', 'Terminal wincmds passthrough' },
+    -- { 't', '<C-y>', '<C-\\><C-n><C-y>', 'Terminal escape when scrolling with C-y or trackpad' },
+    -- { 't', '<C-e>', '<C-\\><C-n><C-e>', 'Terminal escape when scrolling with C-e or trackpad' },
+    { 't', '<C-o>', '<C-\\><C-n><C-o>', 'Terminal escaped C-o' },
+    -- { 't', 'kk', '<C-\\><C-n>k', 'Typing kk in the terminal breaks out of terminal mode' },
 
     -- Navigate windows
     { { 'n', 'i', 'v', 'x', 't', }, '<M-h>', function () navigate('h') end, 'Move to left window' },
     { { 'n', 'i', 'v', 'x', 't', }, '<M-j>', function () navigate('j') end, 'Move to lower window' },
     { { 'n', 'i', 'v', 'x', 't', }, '<M-k>', function () navigate('k') end, 'Move to higher window' },
     { { 'n', 'i', 'v', 'x', 't', }, '<M-l>', function () navigate('l') end, 'Move to right window' },
-
-    { 't', '<C-w>', '<C-\\><C-n><C-w>', 'Terminal wincmds passthrough' },
 
     -- Resize mode
     { 'n', '<leader>rs', require('kin.resize'), 'Toggle resize mode' },
@@ -77,7 +78,7 @@ local global_keymaps = {
     -- Telescope
     { 'n', '<leader>&',     builtin.vim_options,  'Telescope Vim options' },
     { 'n', '<leader><C-o>', builtin.resume,       'Reopen last telescope window' },
-    { 'n', '<leader>au',    builtin.autocommands, 'Telescope :autocmd' },
+    { 'n', '<leader>au',    builtin.autocommands, 'Telescope :autocmds' },
     { 'n', '<leader>bu',    builtin.buffers,      'Telescope :buffers' },
     { 'n', '<leader>fd',    builtin.fd,           'Telescope !fd' },
     { 'n', '<leader>ff',    builtin.find_files,   'Telescope find files' },
@@ -91,27 +92,26 @@ local global_keymaps = {
     { 'n', '<leader>km',    builtin.keymaps,      'Telescope keymaps' },
     { 'n', '<leader>m',     builtin.man_pages,    'Telescope man pages' },
     { 'n', '<leader>of',    builtin.oldfiles,     'Telescope :oldfiles' },
-    { 'n', '<leader>qf',    builtin.quickfix,     'Telescope quickfix list' },
     { 'n', '<leader>rg',    builtin.registers,    'Telescope :registers' },
     -- { 'n', '<leader>ts',    builtin.treesitter,   'Telescope treesitter symbols' },
 
     -- Diagnostics
     { 'n', '<leader>e', vim.diagnostic.open_float, 'Open diagnostics in floating window' },
+    { 'n', '<leader>et', builtin.diagnostics, 'Open diagnostics in telescope window' },
     { 'n', '[d',        vim.diagnostic.goto_prev,  'Go to previous error' },
     { 'n', ']d',        vim.diagnostic.goto_next,  'Go to next error' },
     -- { 'n', '<leader>q', vim.diagnostic.setloclist, 'idk' },
 
     -- Debugging
-    { 'n', '<leader>c',  dap.continue,          'Start or continue debugging' },
-    { 'n', '<leader>n',  dap.step_over,         'Debug: Step over' },
-    { 'n', '<leader>si', dap.step_into,         'Debug: Step into' },
-    { 'n', '<leader>so', dap.step_out,          'Debug: Step out' },
-    { 'n', '<leader>b',  dap.toggle_breakpoint, 'Debug: Toggle breakpoint' }, -- TODO add logic to set signcolumn = 'no' if there are no more brkpnts
-    { 'n', '<leader>dr', dap.repl.open,         'Open debugger REPL' },
-
-    --- Debugging UI
-    { 'n', '<leader>uo', dapui.open,  'Open debugger UI' },
-    { 'n', '<leader>uc', dapui.close, 'Close debugger UI' },
+    { 'n', '<leader>dc', dap.continue,          'Debug: Start or continue debugging' },
+    { 'n', '<leader>dn', dap.step_over,         'Debug: Step over' },
+    { 'n', '<leader>di', dap.step_into,         'Debug: Step into' },
+    { 'n', '<leader>do', dap.step_out,          'Debug: Step out' },
+    { 'n', '<leader>db', dap.toggle_breakpoint, 'Debug: Toggle breakpoint' }, -- TODO add logic to set signcolumn = 'no' if there are no more brkpnts
+    { 'n', '<leader>dr', dap.repl.open,         'Debug: Open debugger REPL' },
+    { 'n', '<leader>uo', dapui.open,            'Debug: Open UI' },
+    { 'n', '<leader>uc', dapui.close,           'Debug: Close UI' },
+    { 'n', '<leader><C-k>', function () dapui.eval(nil, { enter = true}) end, 'Debug: Evaluate at cursor' },
 
     -- TODO Learn these first before implementing them
     -- { 'n', '<leader>lp', function()
@@ -135,7 +135,7 @@ local global_keymaps = {
     --
     -- { { 'i', 's' }, '<c-j>', function()
     --     if ls.jumpable(-1) then
-    --         ls.jump(-1)
+    --         ls.jum(-1)
     --     end
     -- end, { silent = true } },
     --
@@ -169,12 +169,19 @@ vim.api.nvim_create_autocmd('LspAttach', {
             { 'n', 'gD',        b.declaration,     'LSP: Go to declaration' },
             { 'n', 'gd',        b.definition,      'LSP: Go to definition' },
             { 'n', 'gr',        b.references,      'LSP: Get references' },
+            { 'n', 'grt',       builtin.lsp_references, 'LSP: Get references in Telescope window' },
             { 'n', 'gt',        b.type_definition, 'LSP: Go to type definition' },
-            { 'n', 'gi',        b.implementation,  'LSP: Go to implementation' },
+            { 'n', 'gtt',       builtin.lsp_type_definitions, 'LSP: Go to type definition' },
+            { 'n', 'gi',        builtin.lsp_implementations,  'LSP: Go to implementation' },
             { 'n', 'K',         b.hover,           'LSP: Hover documentation' },
             { 'n', '<C-k>',     b.signature_help,  'LSP: Signature help' },
             { 'n', '<leader>r', b.rename,          'LSP: Project global rename' },
             -- { 'n', '<leader>f', function() b.format { async = true } end, 'LSP: Format' },
+
+            { 'n', '<leader>fs', builtin.lsp_document_symbols, 'LSP: document symbols in Telescope window' },
+            { 'n', '<leader>ws', builtin.lsp_workspace_symbols, 'LSP: workspace symbols in Telescope window' },
+            { 'n', '<leader>ic', builtin.lsp_incoming_calls,   'LSP: incoming calls in Telescope window' },
+            { 'n', '<leader>oc', builtin.lsp_outgoing_calls,   'LSP: outgoing calls in Telescope window' },
 
             -- TODO: Figure out if you actually would use these
             -- { 'n', '<leader>wa', vim.lsp.buf.add_workspace_folder, opts },
