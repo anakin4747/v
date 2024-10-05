@@ -64,7 +64,16 @@
 - Creating custom snippets and getting snippet keybindings working
 
 # Debugging
-## Menu
+- have every tree data structure just display as a fully folded file and have
+  them open and close with fold commands
+- Have a debug mode where n is next c is continue
+- For debugging hide all the windows by default and figure out how to open
+  specific ones manually.
+  And have the default layout just be the file being debugged.
+  If you want any of the items open it in telescope.
+  God I need to be able to hover and see the current values of a variable.
+  With folding and everything.
+## Menu - not so important
 - Add a menu for selecting your executable file and args
 - Have the menu have memory from the previous run
 - Have the menu also find executable files for you to choose from
