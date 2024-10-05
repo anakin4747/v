@@ -1,4 +1,25 @@
-
+# VSCode feature comparision
+## C
+### Before compiling
+#### Go to definition
+- vscode: go to definition does a best effort search and showed the correct
+  definition as the most likely in a list of possible options when there is
+  only one definition it opens it in a new file and jumps to it
+- neovim: fails to go to definition but will sometimes jump to the declaration
+  if it there is one
+- desired behaviour: best effort search and providing a list of likely options
+  and not jumping to declaration since I want a specific keybinding for that
+  and I dont want them to overlap for no reason
+#### Go to declaration
+- vscode: go to declaration does a best effort search and showed the correct
+  declaration as the most likely in a list of possible options when there is
+  only one declaration it opens it in a new file and jumps to it
+- neovim: either goes to declaration or fails
+- desired behaviour: goes to declaration or alerts that no declaration was
+  found or lists multiple if multiple options are available. Does not go to
+  definition
+#### Go to type definition
+- vscode: goes to type definition - assuming it does a best effort search
 
 # LSP
 - For every LSP action have a fallback so that you still do something if the
