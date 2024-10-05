@@ -17,7 +17,8 @@ local function ZZ()
     local tabpage  = vim.api.nvim_get_current_tabpage()
     local windows  = vim.api.nvim_tabpage_list_wins(tabpage)
 
-    if (buftype == 'help' and filetype == 'help') or buftype == 'nowrite' then
+    if (buftype == 'help' and filetype == 'help') or
+        buftype == 'nowrite' then
 
         if #windows ~= 1 then vim.api.nvim_win_close(0, true) end
 
@@ -26,8 +27,11 @@ local function ZZ()
 
     if buftype == 'terminal' then
         tabscope.remove_tab_buffer()
+
         -- If last window and buffer also quit to avoid annoying no name empty file
-        if #windows == 1 and #get_tab_local_bufs() == 1 then vim.cmd('quit') end
+        if #windows == 1 and #Get_tab_local_bufs() == 1 then
+            vim.cmd('quit')
+        end
 
         return
     end
