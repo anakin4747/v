@@ -8,6 +8,19 @@ dap.adapters.gdb = {
 
 local gdb_cfg = {
     {
+        -- Do this before debugging an external process
+        -- echo 0 | sudo tee /proc/sys/kernel/yama/ptrace_scope
+        name = 'Attach to neovim',
+        type = 'gdb',
+        request = 'attach',
+        pid = function ()
+            local output = vim.fn.system(vim.fn.expand('~/src/neovim/dbg.sh'))
+            local pid = tonumber(output)
+            assert(type(pid) == "number", "gdb.lua: dbg.sh did not print a number")
+            return tonumber(pid)
+        end,
+    },
+    {
         name = "Launch",
         type = "gdb",
         request = "launch",
