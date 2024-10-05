@@ -17,6 +17,7 @@ local default_ls_configs = {
     -- 'mesonlsp',
     'nil_ls',
     'pyright',
+    'rust_analyzer',
     'tsserver',
     'vimls',
 }
