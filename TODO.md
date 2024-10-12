@@ -21,6 +21,10 @@
 #### Go to type definition
 - vscode: goes to type definition - assuming it does a best effort search
 
+# Takeaway from VSCode comparison
+- VSCode has superior LSP features for uncompiled C codebases
+- RESOLVE THIS
+
 # LSP
 - For every LSP action have a fallback so that you still do something if the
   lsp fails.
@@ -80,32 +84,20 @@
 - the menu could also provide an option to build maybe
 
 # Terminal
-- Add ctrl-l to terminal mode so that clearing doesnt acutallt clear the buffer
-  but just scrolls up
+<!-- - Add ctrl-l to terminal mode so that clearing doesnt acutallt clear the buffer -->
+<!--   but just scrolls up -->
 - Make it so that you can get lsp completion from the command line insert mode.
 - Make the terminal buffer a double buffer, one that you can modify and one
   that is the acutal immutable output of the terminal. This makes it so that
   you can edit anywhere like editing a file path to then `gf` to. Or just
   properly edit your command line input.
-# Global nvim
-- Global neovim that is only for terminals and you use a nested neovim to edit
-  files.
-- This will keep things closer to how they used to be before you started using
-  terminals in neovim. You will have tabs for each terminal (closer to tmux)
-- <C-b>v, <C-b>s will manipulate the global neovim since they are terminal
-  related
-- The only buffers in the global neovim should only be terminals and the only
-  buffers in the child neovims should only be files.
-- solves a lot of the issues you have relating to a global neovim
-- wont need tab local buffers any more since each child nvim instance will
-  replicate the effect by being different instances.
 
-# Modes
-- Look into nvim-libmodal
-- See if you could have a debug mode so that you don't need to prefix gdb-like
-  keybindings with leader
-- Diagnostic mode? idk maybe
-- i bet there are a bunch of ways to use this
+<!-- # Modes -->
+<!-- - Look into nvim-libmodal -->
+<!-- - See if you could have a debug mode so that you don't need to prefix gdb-like -->
+<!--   keybindings with leader -->
+<!-- - Diagnostic mode? idk maybe -->
+<!-- - i bet there are a bunch of ways to use this -->
 
 # Tabs? buffers?
 
@@ -131,4 +123,22 @@ Add to <C-g> a mini little display of the tabs and the buffers in those tabs
 Like an overview, also look into naming tabs like tmux that could make you more
 organized
 
+
+# Global nvim - Failed to implement
+- Global neovim that is only for terminals and you use a nested neovim to edit
+  files.
+- This will keep things closer to how they used to be before you started using
+  terminals in neovim. You will have tabs for each terminal (closer to tmux)
+- <C-b>v, <C-b>s will manipulate the global neovim since they are terminal
+  related
+- The only buffers in the global neovim should only be terminals and the only
+  buffers in the child neovims should only be files.
+- solves a lot of the issues you have relating to a global neovim
+- wont need tab local buffers any more since each child nvim instance will
+  replicate the effect by being different instances.
+## Reasons why this failed
+- windowing became much more difficult to manage
+- had to figure out how to set keymaps based on global or child (how to
+  determine if in child or parent)
+- couldn't have <esc><esc> only in parent. 
 
