@@ -49,3 +49,71 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
     desc = "Remove trailing whitespace on write"
 })
+
+
+
+-- vim.api.nvim_create_autocmd("VimEnter", {
+--     pattern = "*",
+--     callback = function()
+--         vim.fn.system("notify-send VimEnter")
+--
+--
+--         if not parent_file_present and not child_file_present then
+--             vim.fn.system([[
+--                 notify-send \
+--                     "Parent Nvim Session started" \
+--                     "Create parent file flag"
+--             ]])
+--             return
+--         end
+--
+--         if not child_file_present then
+--             vim.fn.system([[
+--                 notify-send \
+--                     "Child Nvim Session started" \
+--                     "Create child file flag"
+--             ]])
+--         end
+--     end,
+--     desc = ""
+-- })
+--
+-- vim.api.nvim_create_autocmd("VimLeave", {
+--     pattern = "*",
+--     callback = function()
+--         vim.fn.system("notify-send VimLeave")
+--
+--         if not child_file_present then
+--             vim.fn.system([[
+--                 notify-send \
+--                     "Child Nvim Session started" \
+--                     "Create child file flag"
+--             ]])
+--         end
+--
+--     end,
+--     desc = ""
+-- })
+
+-- vim.notify(vim.fn.system("pstree"))
+--[[
+
+4 states with 2 flags
+
+On VimEnter
+
+P C
+0 0 -> No Parent Flag, No Child flag -> In parent process -> create parent flag
+0 1 -> No Parent Flag, Child flag present -> assert and error out
+1 0 -> Parent Flag present, no child flag -> In childe process -> create child flag
+1 1 -> Parent flag present, child flag present -> In grandchild? bad -> error out
+
+On VimLeave
+
+P C
+0 0 -> No Parent Flag, No Child flag -> assert and error out
+0 1 -> No Parent Flag, Child flag present -> assert and error out
+1 0 -> Parent Flag present, no child flag -> in parent process -> remove parent flag
+1 1 -> Parent flag present, child flag present -> in child process -> remove child flag
+
+--]]
