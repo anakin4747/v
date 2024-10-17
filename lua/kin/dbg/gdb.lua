@@ -6,6 +6,13 @@ dap.adapters.gdb = {
     args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
 }
 
+dap.defaults.fallback.external_terminal = {
+    command = '/usr/local/bin/st',
+    args = { '-e' }
+}
+dap.defaults.fallback.force_external_terminal = true
+
+
 local gdb_cfg = {
     {
         -- Do this before debugging an external process
@@ -19,6 +26,13 @@ local gdb_cfg = {
             assert(type(pid) == "number", "gdb.lua: dbg.sh did not print a number")
             return tonumber(pid)
         end,
+    },
+    {
+        name = 'launch neovim',
+        type = 'gdb',
+        request = 'launch',
+        program = '/home/kin/src/neovim/build/bin/nvim',
+        externalConsole = true
     },
     {
         name = "Launch",
