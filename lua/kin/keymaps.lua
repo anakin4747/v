@@ -153,6 +153,16 @@ for _, keymap in ipairs(global_keymaps) do
     vim.keymap.set(mode, lhs, rhs, opts)
 end
 
+for i = 1, 9 do
+    local opts = { noremap = true, silent = true, desc = "Move to " .. i .. " tabpage" }
+    vim.keymap.set(
+        { 'n', 't', 'v', 'i', 'x' },
+        ('<M-%d>'):format(i),          -- Alt+[1-9]
+        ('<C-\\><C-n>%dgt'):format(i), -- goto tab [1-9] (needs terminal escaping)
+        opts
+    )
+end
+
 
 -- Use LspAttach autocommand to only map the following keys
 -- after the language server attaches to the current buffer
