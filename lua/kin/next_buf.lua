@@ -48,22 +48,26 @@ end
 --- Non wrapping next buffer
 ---@param terminal_bufs? boolean|nil move through terminal buffers if true, move
 ---through non-terminal buffers if false, move through any if nil
----@param direction? boolean|nil default true for moving right
-local function next_buf(terminal_bufs, direction)
-    if direction == nil then direction = true end
-    -- cannot be written as `direction = direction or true` since nil and false
+---@param move_rightously? boolean|nil default true for moving right
+local function next_buf(terminal_bufs, move_rightously)
+    if move_rightously == nil then move_rightously = true end
+    -- cannot be written as `move_rightously = move_rightously or true` since nil and false
     -- are handled differently
 
     local bufs = get_tab_local_bufs(terminal_bufs)
+    assert_sorted(bufs) -- REMOVE this after confirming get_tab_local_bufs always returns a sorted list
+
     if #bufs == 0 then return end -- No buffers to move to -> do nothing
-    assert_sorted(bufs) -- REMOVE this after confirming get_tab_local_bufs always returns a sorted
 
     local cur_buf = vim.api.nvim_get_current_buf()
 
-    -- print('\n\n')
-    -- print('cur_buf', cur_buf)
-    -- print('bufs', vim.inspect(bufs))
-    -- print('num_of_bufs', num_of_bufs)
+    if cur_buf == bufs[#bufs] and move_rightously then
+        return -- if last buffer and moving right do nothing
+    end
+
+    if cur_buf == bufs[1] and not move_rightously then
+        return -- if first buffer and moving left do nothing
+    end
 
     --- Check if current buffer is in desired list of buffers
     ---@return boolean true if the current buffer is in the list, false otherwise.
@@ -77,36 +81,18 @@ local function next_buf(terminal_bufs, direction)
 
     local cur_buf_is_in_bufs, idx = cur_buf_in_bufs()
 
-    -- print(buf_is_in_bufs, idx)
-
     if not cur_buf_is_in_bufs then
         -- TODO: add a way to jump to previous buffer in the desired list
         -- instead of just the first
         vim.cmd('b' .. bufs[1]) -- Goto left-most buffer in requested buftype list
-        -- print('Current buffer not in requested buffers')
         return
     end
 
-    if cur_buf == bufs[#bufs] and direction then
-        -- print(direction)
-        -- print('cur_buf is last buf')
-        return
-    end
-
-    if cur_buf == bufs[1] and not direction then
-        -- print('cur_buf is first buf')
-        return
-    end
-
-    -- print('move to cur_buf's index+1')
-
-    if direction then
-        -- print(direction, idx)
+    if move_rightously then
         vim.cmd('b' .. bufs[idx+1])
         return
     end
 
-    -- print(idx)
     vim.cmd('b' .. bufs[idx-1])
 end
 
