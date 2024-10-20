@@ -8,6 +8,7 @@ local cmp = require('cmp')
 
 local navigate = require('kin.navigate')
 local ZZ = require('kin.ZZ')
+local next_buf = require('kin.next_buf')
 
 -- nvim-cmp
 cmp.setup({
@@ -27,12 +28,10 @@ local global_keymaps = {
     -- { mode, lhs, rhs, description }
 
     -- Navigate buffers
-    { 'n', '<S-l>', ':bnext<CR>',     'Go to next buffer' },
-    { 'n', '<S-h>', ':bprevious<CR>', 'Go to previous buffer' },
-
-    -- Navigate tabs
-    { { 'n', 't' }, '<C-l>', '<C-\\><C-n>:tabnext<CR>',     'Go to next tab' },
-    { { 'n', 't' }, '<C-h>', '<C-\\><C-n>:tabprevious<CR>', 'Go to previous tab' },
+    { {  'n', 'i', 'x', 'v' }, '<C-h>', function () next_buf(true, false)  end, 'Previous terminal buffer' },
+    { {  'n', 'i', 'x', 'v' }, '<C-l>', function () next_buf(true, true)   end, 'Next terminal buffer' },
+    { {  'n', 'i', 'x', 'v' }, '<S-h>', function () next_buf(false, false) end, 'Previous non-terminal buffer' },
+    { {  'n', 'i', 'x', 'v' }, '<S-l>', function () next_buf(false, true)  end, 'Next non-terminal buffer' },
 
     -- Terminal
     { 't', '<esc><esc>', '<C-\\><C-n>',           'Double <esc> to exit terminal mode' },
