@@ -21,6 +21,10 @@ cmp.setup({
             behavior = cmp.ConfirmBehavior.Insert,
             select = true,
         }),
+        ["<Tab>"] = cmp.mapping.confirm({
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+        }),
     },
 })
 
