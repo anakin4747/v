@@ -45,6 +45,26 @@ local function assert_sorted(tbl)
     return true
 end
 
+Old_terminal_buf = nil
+Old_non_term_buf = nil
+
+local function get_old_buf(terminal_bufs)
+    if terminal_bufs then
+        return Old_terminal_buf
+    end
+
+    return Old_non_term_buf
+end
+
+local function set_old_buf(bufnr, terminal_bufs)
+    if terminal_bufs then
+        Old_terminal_buf = bufnr
+    else
+        Old_non_term_buf = bufnr
+    end
+    return bufnr
+end
+
 --- Non wrapping next buffer
 ---@param terminal_bufs? boolean|nil move through terminal buffers if true, move
 ---through non-terminal buffers if false, move through any if nil
@@ -82,18 +102,18 @@ local function next_buf(terminal_bufs, move_rightously)
     local cur_buf_is_in_bufs, idx = cur_buf_in_bufs()
 
     if not cur_buf_is_in_bufs then
-        -- TODO: add a way to jump to previous buffer in the desired list
-        -- instead of just the first
-        vim.cmd('b' .. bufs[1]) -- Goto left-most buffer in requested buftype list
+        -- Goto old buffer in the desired list or first if nil
+        local old_buf = get_old_buf(terminal_bufs) or bufs[1]
+        vim.cmd('b' .. old_buf)
         return
     end
 
     if move_rightously then
-        vim.cmd('b' .. bufs[idx+1])
+        vim.cmd('b' .. set_old_buf(bufs[idx+1], terminal_bufs))
         return
     end
 
-    vim.cmd('b' .. bufs[idx-1])
+    vim.cmd('b' .. set_old_buf(bufs[idx-1], terminal_bufs))
 end
 
 return next_buf
