@@ -50,11 +50,22 @@ Old_non_term_buf = {}
 
 local function get_old_buf(terminal_bufs)
     local tabpage = vim.api.nvim_get_current_tabpage()
+    local buf
+
     if terminal_bufs then
-        return Old_terminal_buf[tabpage]
+        buf = Old_terminal_buf[tabpage]
+    else
+        buf = Old_non_term_buf[tabpage]
     end
 
-    return Old_non_term_buf[tabpage]
+    local buflisted = vim.api.nvim_get_option_value('buflisted', { buf = buf })
+
+    -- Buf is only valid if listed
+    if buflisted == false then
+        return nil
+    end
+
+    return buf
 end
 
 local function set_old_buf(bufnr, terminal_bufs)
