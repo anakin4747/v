@@ -45,22 +45,24 @@ local function assert_sorted(tbl)
     return true
 end
 
-Old_terminal_buf = nil
-Old_non_term_buf = nil
+Old_terminal_buf = {}
+Old_non_term_buf = {}
 
 local function get_old_buf(terminal_bufs)
+    local tabpage = vim.api.nvim_get_current_tabpage()
     if terminal_bufs then
-        return Old_terminal_buf
+        return Old_terminal_buf[tabpage]
     end
 
-    return Old_non_term_buf
+    return Old_non_term_buf[tabpage]
 end
 
 local function set_old_buf(bufnr, terminal_bufs)
+    local tabpage = vim.api.nvim_get_current_tabpage()
     if terminal_bufs then
-        Old_terminal_buf = bufnr
+        Old_terminal_buf[tabpage] = bufnr
     else
-        Old_non_term_buf = bufnr
+        Old_non_term_buf[tabpage] = bufnr
     end
     return bufnr
 end
