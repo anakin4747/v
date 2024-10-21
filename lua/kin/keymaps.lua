@@ -32,10 +32,10 @@ local global_keymaps = {
     -- { mode, lhs, rhs, description }
 
     -- Navigate buffers
-    { {  'n', 'i', 'x', 'v' }, '<C-h>', function () next_buf(true, false)  end, 'Previous terminal buffer' },
-    { {  'n', 'i', 'x', 'v' }, '<C-l>', function () next_buf(true, true)   end, 'Next terminal buffer' },
-    { {  'n', 'i', 'x', 'v' }, '<S-h>', function () next_buf(false, false) end, 'Previous non-terminal buffer' },
-    { {  'n', 'i', 'x', 'v' }, '<S-l>', function () next_buf(false, true)  end, 'Next non-terminal buffer' },
+    { { 'n', 'i', 'x', 'v', 't' }, '<C-h>', function () next_buf(true, false)  end, 'Previous terminal buffer' },
+    { { 'n', 'i', 'x', 'v', 't' }, '<C-l>', function () next_buf(true, true)   end, 'Next terminal buffer' },
+    { { 'n', 'v', }, '<S-h>', function () next_buf(false, false) end, 'Previous non-terminal buffer' },
+    { { 'n', 'v', }, '<S-l>', function () next_buf(false, true)  end, 'Next non-terminal buffer' },
 
     -- Terminal
     { 't', '<esc><esc>', '<C-\\><C-n>',           'Double <esc> to exit terminal mode' },
