@@ -38,6 +38,8 @@ local global_keymaps = {
     { { 'n', 'v', }, '<S-l>', function () next_buf(false, true)  end, 'Next non-terminal buffer' },
 
     -- Terminal
+    { 't', '<S-h><S-h><S-h>', function () next_buf(false, false) end, 'Previous non-terminal buffer' },
+    { 't', '<S-l><S-l><S-l>', function () next_buf(false, true)  end, 'Next non-terminal buffer' },
     { 't', '<esc><esc>', '<C-\\><C-n>',           'Double <esc> to exit terminal mode' },
     { 'n', '<leader>t',  ':tabnew +terminal<cr>', 'Open a terminal' },
     { { 'n', 't', }, '<C-b>s', '<C-\\><C-n>:split +terminal<cr>i',      'Open a terminal below' },
