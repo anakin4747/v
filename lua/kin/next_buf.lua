@@ -45,38 +45,8 @@ local function assert_sorted(tbl)
     return true
 end
 
-Old_terminal_buf = {}
-Old_non_term_buf = {}
-
-local function get_old_buf(terminal_bufs)
-    local tabpage = vim.api.nvim_get_current_tabpage()
-    local buf
-
-    if terminal_bufs then
-        buf = Old_terminal_buf[tabpage]
-    else
-        buf = Old_non_term_buf[tabpage]
-    end
-
-    local buflisted = vim.api.nvim_get_option_value('buflisted', { buf = buf })
-
-    -- Buf is only valid if listed
-    if buflisted == false then
-        return nil
-    end
-
-    return buf
-end
-
-local function set_old_buf(bufnr, terminal_bufs)
-    local tabpage = vim.api.nvim_get_current_tabpage()
-    if terminal_bufs then
-        Old_terminal_buf[tabpage] = bufnr
-    else
-        Old_non_term_buf[tabpage] = bufnr
-    end
-    return bufnr
-end
+local set_old_buf = require('kin.old_buf').set_old_buf
+local get_old_buf = require('kin.old_buf').get_old_buf
 
 --- Non wrapping next buffer
 ---@param terminal_bufs? boolean|nil move through terminal buffers if true, move
