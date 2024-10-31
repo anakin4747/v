@@ -1,5 +1,6 @@
 
 local tabscope = require('tabscope')
+local ob = require('kin.old_buf')
 
 function Get_tab_local_bufs()
     local tab_local_bufs = {}
@@ -28,32 +29,32 @@ local function ZZ()
     if buftype == 'terminal' then
         tabscope.remove_tab_buffer()
 
-        -- If last window and buffer also quit to avoid annoying no name empty file
-        if #windows == 1 and #Get_tab_local_bufs() == 1 then
-            vim.cmd('quit')
+        local old_term_buf = ob.get_old_buf(true)
+        if old_term_buf ~= nil then
+            vim.cmd('b' .. old_term_buf)
         end
-
         return
     end
 
     if filetype == 'gitcommit' then
         vim.cmd('write | quit')
-
         return
     end
 
     if buftype == 'nofile' and filetype == 'lspinfo' then
-        -- LspInfo floating window
         vim.cmd('quit')
-
         return
     end
 
     vim.cmd('silent! write')
-    local cur_buf = vim.api.nvim_get_current_buf()
-    -- vim.cmd('b#') -- TODO: figure out how to make this not reopen closed
-    -- files
-    tabscope.remove_tab_buffer(cur_buf)
+
+    tabscope.remove_tab_buffer()
+
+    local old_buf = ob.get_old_buf(false)
+    print(old_buf)
+    if old_buf ~= nil then
+        vim.cmd('b' .. old_buf)
+    end
 end
 
 return ZZ
