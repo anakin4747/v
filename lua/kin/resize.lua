@@ -66,6 +66,7 @@ local function toggle_resize_mode()
         vim.keymap.set("n", "l", function () resize_by_dir("right", vim.g.resize_value) end)
         vim.keymap.set("n", "=", function () vim.g.resize_value = vim.g.resize_value + 1 end)
         vim.keymap.set("n", "-", function () vim.g.resize_value = vim.g.resize_value - 1 end)
+        vim.keymap.set("n", "<esc>", toggle_resize_mode)
         is_resize_mode = false
     else
         vim.cmd("silent unmap h")
@@ -74,6 +75,7 @@ local function toggle_resize_mode()
         vim.cmd("silent unmap l")
         vim.cmd("silent unmap =")
         vim.cmd("silent unmap -")
+        vim.cmd("silent unmap <esc>")
         is_resize_mode = true
     end
 end
