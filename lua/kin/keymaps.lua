@@ -116,7 +116,7 @@ local global_keymaps = {
     { 'n', '<leader>dr', dap.repl.open,         'Debug: Open debugger REPL' },
     { 'n', '<leader>uo', dapui.open,            'Debug: Open UI' },
     { 'n', '<leader>uc', dapui.close,           'Debug: Close UI' },
-    { 'n', '<leader><C-k>', function () dapui.eval(nil, { enter = true}) end, 'Debug: Evaluate at cursor' },
+    { 'n', '<leader><C-k>', function () dapui.eval(nil, { enter = true }) end, 'Debug: Evaluate at cursor' },
 
     -- TODO Learn these first before implementing them
     -- { 'n', '<leader>lp', function()
