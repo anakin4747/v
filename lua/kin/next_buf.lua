@@ -91,12 +91,14 @@ local function next_buf(terminal_bufs, move_rightously)
         return
     end
 
+    set_old_buf(cur_buf, terminal_bufs)
+
     if move_rightously then
-        vim.cmd('b' .. set_old_buf(bufs[idx+1], terminal_bufs))
+        vim.cmd('b' .. bufs[idx+1])
         return
     end
 
-    vim.cmd('b' .. set_old_buf(bufs[idx-1], terminal_bufs))
+    vim.cmd('b' .. bufs[idx-1])
 end
 
 return next_buf
