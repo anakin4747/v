@@ -15,7 +15,7 @@ local default_ls_configs = {
     'gopls',
     -- 'ltex',
     'nil_ls',
-    'pyright',
+    'basedpyright',
     'rust_analyzer',
     'tsserver',
     'vimls',
