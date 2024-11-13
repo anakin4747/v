@@ -81,4 +81,11 @@ require('lazy').setup({
     'tpope/vim-dadbod',
     'kristijanhusak/vim-dadbod-completion',
     'kristijanhusak/vim-dadbod-ui',
+
+    {
+        'williamboman/mason.nvim',
+        config = function () require('mason').setup() end,
+    },
+
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
 })
