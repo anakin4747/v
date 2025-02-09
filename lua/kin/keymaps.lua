@@ -80,6 +80,9 @@ local global_keymaps = {
     -- Undotree
     { 'n', '<leader>ut', vim.cmd.UndotreeToggle, 'Toggle undotree' },
 
+    -- Manpage undercursor
+    { 'n', '<leader>K', function () vim.cmd('vert Man ' .. vim.fn.expand("<cword>")) end, 'Open Man Page for word undercursor' },
+
     -- Telescope
     { 'n', '<leader>&',     builtin.vim_options,  'Telescope Vim options' },
     { 'n', '<leader><C-o>', builtin.resume,       'Reopen last telescope window' },
