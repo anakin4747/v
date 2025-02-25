@@ -1,5 +1,4 @@
 
-local tabscope = require('tabscope')
 local ob = require('kin.old_buf')
 
 function Get_tab_local_bufs()
@@ -27,7 +26,8 @@ local function ZZ()
     end
 
     if buftype == 'terminal' then
-        tabscope.remove_tab_buffer()
+
+        vim.cmd "bd!"
 
         local old_term_buf = ob.get_old_buf(true)
         if old_term_buf ~= nil then
@@ -46,9 +46,7 @@ local function ZZ()
         return
     end
 
-    vim.cmd('silent! write')
-
-    tabscope.remove_tab_buffer()
+    vim.cmd('silent! write | bd!')
 
     local old_buf = ob.get_old_buf(false)
     print(old_buf)

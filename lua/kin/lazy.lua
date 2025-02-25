@@ -71,12 +71,6 @@ require('lazy').setup({
         config = function () require('nvim-dap-virtual-text').setup() end,
     },
 
-    -- Tab local buffers
-    {
-        'backdround/tabscope.nvim',
-        config = function () require('tabscope').setup() end,
-    },
-
     -- 'nvim-treesitter/nvim-treesitter-context',
 
     'tpope/vim-dadbod',
