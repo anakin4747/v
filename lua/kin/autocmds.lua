@@ -49,3 +49,19 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
     desc = "Remove trailing whitespace on write"
 })
+
+-- my attempt at replacing the `recording @` with a blinking cursor since you
+-- hid it by a side effect of having a minimal UI
+-- vim.api.nvim_create_autocmd("RecordingEnter", {
+--     pattern = "*",
+--     command = [[ 
+--         set guicursor=n-v-c-sm:block-blinkwait175-blinkoff150-blinkon175,i-ci-ve:ver25,r-cr-o:hor20, 
+--     ]],
+--     desc = "Blink cursor when starting a macro"
+-- })
+--
+-- vim.api.nvim_create_autocmd("RecordingLeave", {
+--     pattern = "*",
+--     command = [[ set guicursor=n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20 ]],
+--     desc = "Restore cursor default behaviour after end of macro"
+-- })
