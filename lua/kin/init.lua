@@ -6,6 +6,7 @@ local includes = {
     'autocmds',
     'cmp',
     'dbg',
+    'help',
     'keymaps',
     'lsp',
     'options',
