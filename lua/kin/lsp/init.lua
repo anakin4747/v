@@ -31,14 +31,6 @@ local custom_config = {
     'lua',
 }
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-  border = "rounded",
-})
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-  border = "rounded",
-})
-
 -- safely require all custom config files
 for _, ls_cfg_file in ipairs(custom_config) do
     local success, err = pcall(require, 'kin.lsp.' .. ls_cfg_file)
@@ -48,6 +40,21 @@ for _, ls_cfg_file in ipairs(custom_config) do
         vim.notify(warning, vim.log.levels.WARN)
     end
 end
+
+do -- Add rounded borders to lsp popups
+
+    local with = vim.lsp.with
+    local handlers = vim.lsp.handlers
+
+    handlers['textDocument/hover'] = with(handlers.hover, {
+        border = 'rounded',
+    })
+
+    handlers['textDocument/signatureHelp'] = with(handlers.signature_help, {
+        border = 'rounded',
+    })
+end
+
 
 require('mason-tool-installer').setup({
 
