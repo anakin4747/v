@@ -186,8 +186,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             -- { mode, lhs, rhs, description }
             { 'n', 'gD',        b.declaration,     'LSP: Go to declaration' },
             { 'n', 'gd',        b.definition,      'LSP: Go to definition' },
-            { 'n', 'gr',        b.references,      'LSP: Get references' },
-            { 'n', 'grt',       builtin.lsp_references, 'LSP: Get references in Telescope window' },
+            { 'n', 'gr',        builtin.lsp_references, 'LSP: Get references in Telescope window' },
             { 'n', 'gt',        b.type_definition, 'LSP: Go to type definition' },
             { 'n', 'gtt',       builtin.lsp_type_definitions, 'LSP: Go to type definition' },
             { 'n', 'gi',        builtin.lsp_implementations,  'LSP: Go to implementation' },
