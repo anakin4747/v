@@ -25,6 +25,7 @@ require('lazy').setup({
 
     'mbbill/undotree',
 
+    'tpope/vim-surround',
     'tpope/vim-fugitive',
 
 	{ -- Colorscheme
