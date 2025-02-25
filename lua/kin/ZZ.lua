@@ -1,16 +1,6 @@
 
 local ob = require('kin.old_buf')
 
-function Get_tab_local_bufs()
-    local tab_local_bufs = {}
-    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-        if vim.bo[buf].buflisted then
-            table.insert(tab_local_bufs, buf)
-        end
-    end
-    return tab_local_bufs
-end
-
 local function ZZ()
     local buftype  = vim.api.nvim_get_option_value('buftype', {})
     local filetype = vim.api.nvim_get_option_value('filetype', {})
