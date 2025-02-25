@@ -19,6 +19,7 @@ local options = {
     infercase = true,    -- allows completions to use the case you've already typed
     iskeyword = "a-z,A-Z,48-57,_",    -- What characters count as part of a word
     laststatus = 0,    -- Hide status bar
+    list = true,
     modeline = false,
     mouse = "",
     number = true,
