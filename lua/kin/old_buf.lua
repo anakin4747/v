@@ -13,12 +13,11 @@ function M.get_old_buf(terminal_bufs)
         buf = Old_non_term_buf[tabpage]
     end
 
-    local buflisted = vim.api.nvim_get_option_value('buflisted', { buf = buf })
+    if buf == nil then return nil end
 
-    -- Buf is only valid if listed
-    if buflisted == false then
-        return nil
-    end
+    if not vim.api.nvim_buf_is_valid(buf) then return nil end
+
+    if not vim.bo[buf].buflisted then return nil end
 
     return buf
 end
