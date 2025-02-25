@@ -3,19 +3,22 @@ local lspconfig = require('lspconfig')
 
 local default_ls_configs = {
     -- The file name in lua/lspconfig/server_configurations/*.lua
+    --
+    -- find /home/kin/src/plugins/nvim-lspconfig/lua/lspconfig/server_configurations/*.lua
     -- https://github.com/neovim/nvim-lspconfig.git
     'autotools_ls',
     'awk_ls',
     'bashls',
     'bitbake_ls',
     'clangd',
+    'csharp_ls',
     'cmake',
     'dockerls',
     'ginko_ls',
     'gopls',
     -- 'ltex',
-    'nil_ls',
-    'basedpyright',
+    -- 'nil_ls',
+    'pyright',
     'rust_analyzer',
     'tsserver',
     'vimls',
