@@ -26,13 +26,13 @@ for _, def_ls_cfg_file in ipairs(default_ls_configs) do
     lspconfig[def_ls_cfg_file].setup({})
 end
 
-local custom_config = {
+local custom_configs = {
     -- The file name in lua/lspconfig/server_configurations/*.lua
     'lua',
 }
 
 -- safely require all custom config files
-for _, ls_cfg_file in ipairs(custom_config) do
+for _, ls_cfg_file in ipairs(custom_configs) do
     local success, err = pcall(require, 'kin.lsp.' .. ls_cfg_file)
     if success == false then
         local warning = 'lsp/init.lua: failed to require file: ' .. ls_cfg_file
